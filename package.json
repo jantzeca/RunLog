@@ -1,0 +1,15 @@
+{
+  "name": "runlog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Chris Jantzen <jantzeca@mail.uc.edu>",
+  "license": "MIT",
+  "scripts": {
+    "client": "cd client && yarn run start",
+    "serve": "cd server && yarn run serve",
+    "dev": "concurrently \"yarn run client\" \"yarn run serve\""
+  },
+  "dependencies": {
+    "concurrently": "^5.1.0"
+  }
+}
