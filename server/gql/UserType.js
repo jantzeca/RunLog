@@ -24,6 +24,7 @@ const UserType = new GraphQLObjectType({
     weight: { type: GraphQLNumber },
     measurementSystem: { type: GraphQLString },
     parentId: {
+      // Not sure I really like this
       type: GraphQLID
     },
     runs: {

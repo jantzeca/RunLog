@@ -3,13 +3,15 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const graphqlHTTP = require('express-graphql');
 const dotenv = require('dotenv');
+const morgan = require('morgan');
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
-app.use('/graphql', graphqlHTTP({ schema, graphiql: true })); //probably change route
+app.use('/graphql', graphqlHTTP({ schema, graphiql: true }));
 app.use(express.json());
+app.use(morgan('dev'));
 
 mongoose
   .connect(`mongodb://localhost/runLog`, {
