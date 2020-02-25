@@ -14,18 +14,19 @@ const {
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
+  fields: {}
+});
+
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
   fields: {
-    run: {
-      type: RunType,
-      args: { id: { type: GraphQLID } },
-      resolve(parent, args) {
-        return Run.findById(args.id);
-      }
-    }
+    addRun: {},
+    addUser: {},
+    addShoe: {}
   }
 });
 
 module.exports = new GraphQLSchema({
-  query: RootQuery
-  // mutation: Mutation
+  query: RootQuery,
+  mutation: Mutation
 });
