@@ -20,7 +20,8 @@ const userSchema = new Schema(
     },
     // F.K.'s
     shoes: String,
-    runs: String
+    runs: String,
+    parentId: String
   },
   {
     timestamps: true
