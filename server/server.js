@@ -12,7 +12,6 @@ const app = express();
 app.use(cors());
 app.use(morgan('dev'));
 app.use('/graphql', graphqlHTTP({ schema, graphiql: true }));
-app.use(express.json());
 
 mongoose
   .connect(process.env.MONGO_URI, {
