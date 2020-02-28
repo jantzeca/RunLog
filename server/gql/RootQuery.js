@@ -216,6 +216,18 @@ const Mutation = new GraphQLObjectType({
         });
         return shoe.save();
       }
+    },
+    addDistanceToShoe: {
+      type: ShoeType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        distance: { type: new GraphQLNonNull(GraphQLFloat) }
+      },
+      // TODO: Fix this to update every time it's called
+      resolve(parent, args) {
+        Shoe.update({ _id: args.id }, { $inc: { distance: args.distance } });
+        return Shoe.findById(args.id);
+      }
     }
   }
 });
