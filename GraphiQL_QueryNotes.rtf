@@ -8,7 +8,7 @@
 \f0\fs36 \cf0 Mutations:\
 \
 mutation \{\
-  addUser(email: "chris@email.com", fname: "chris", lname: "jantzen", age: 22, height: 72, weight: 140, measurementSystem: "imperial") \{\
+  addUser(email: "chris@email.com", fname: \'93chris\'94, lname: \'93doe\'94, age: 22, height: 72, weight: 140, measurementSystem: "imperial") \{\
     email\
     fname\
     lname\
@@ -59,6 +59,24 @@ Queries:\
     runs \{\
       distance\
       time\
+    \}\
+    shoes \{\
+      brand\
+      model\
+      distance\
+    \}\
+  \}\
+\}\
+\
+\{\
+  shoe(id: "5e587b7c49496a37ebf78632") \{\
+    brand\
+    model\
+    distance\
+    owner \{\
+      fname\
+      lname\
+      age\
     \}\
   \}\
 \}}

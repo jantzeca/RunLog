@@ -27,6 +27,13 @@ const UserType = new GraphQLObjectType({
     height: { type: GraphQLInt },
     weight: { type: GraphQLFloat },
     measurementSystem: { type: GraphQLString },
+    run: {
+      type: RunType,
+      args: { runId: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Run.findById(args.runId);
+      }
+    },
     runs: {
       type: GraphQLList(RunType),
       resolve(parent, args) {
@@ -51,14 +58,19 @@ const RunType = new GraphQLObjectType({
     location: { type: GraphQLString },
     timeOfDay: { type: GraphQLString },
     shoeId: { type: GraphQLID },
-    userId: { type: GraphQLID }
-    // shoe: {
-    //   type: ShoeType,
-    //   args: { shoeId: { type: GraphQLID } },
-    //   resolve(parent, args) {
-    //     return Shoe.findById(args.shoeId);
-    //   }
-    // }
+    userId: { type: GraphQLID },
+    user: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.userId);
+      }
+    },
+    shoe: {
+      type: ShoeType,
+      resolve(parent, args) {
+        return Shoe.findById(parent.shoeId);
+      }
+    }
   })
 });
 
@@ -70,14 +82,13 @@ const ShoeType = new GraphQLObjectType({
     model: { type: GraphQLString },
     size: { type: GraphQLFloat },
     distance: { type: GraphQLFloat },
-    ownerId: { type: GraphQLID }
-    // ownerId: {
-    //   type: GraphQLID,
-    //   args: { userId: { type: GraphQLID } },
-    //   resolve(parent, args) {
-    //     return User.findById(args.userId);
-    //   }
-    // }
+    ownerId: { type: GraphQLID },
+    owner: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.ownerId);
+      }
+    }
   }
 });
 
@@ -101,7 +112,7 @@ const RootQuery = new GraphQLObjectType({
     runs: {
       type: GraphQLList(RunType),
       resolve(parent, args) {
-        return Run.find({});
+        return Run.find({ userId: parent._id });
       }
     },
     shoe: {
@@ -114,7 +125,13 @@ const RootQuery = new GraphQLObjectType({
     shoes: {
       type: GraphQLList(ShoeType),
       resolve(parent, args) {
-        return Shoe.find({});
+        return Shoe.find({ ownerId: parent._id });
+      }
+    },
+    owner: {
+      type: UserType,
+      resolve(parent, args) {
+        return User.findById(parent.ownerId);
       }
     }
   }
@@ -130,11 +147,11 @@ const Mutation = new GraphQLObjectType({
         time: { type: new GraphQLNonNull(GraphQLString) },
         location: { type: GraphQLString },
         timeOfDay: { type: GraphQLString },
-        shoe: { type: GraphQLID },
+        shoeId: { type: GraphQLID },
         userId: { type: GraphQLID }
       },
       resolve(parent, args) {
-        const { distance, time, location, timeOfDay, shoe, userId } = args;
+        const { distance, time, location, timeOfDay, shoeId, userId } = args;
         const run = new Run({
           distance,
           time,
