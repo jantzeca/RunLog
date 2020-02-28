@@ -56,7 +56,7 @@ const RootQuery = new GraphQLObjectType({
     shoes: {
       type: GraphQLList(RunsType),
       resolve(parent, args) {
-        return Runs.find({});
+        return Shoe.find({});
       }
     }
   }
@@ -66,7 +66,7 @@ const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
     addRun: {
-      type: ShoeType,
+      type: RunType,
       args: {
         distance: { type: new GraphQLNonNull(GraphQLFloat) },
         time: { type: new GraphQLNonNull(GraphQLString) },
@@ -93,8 +93,8 @@ const Mutation = new GraphQLObjectType({
         fname: { type: new GraphQLNonNull(GraphQLString) },
         lname: { type: GraphQLString },
         age: { type: GraphQLInt },
-        height: { type: GraphQLNumber },
-        weight: { type: GraphQLNumber },
+        height: { type: GraphQLInt },
+        weight: { type: GraphQLFloat },
         measurementSystem: { type: new GraphQLNonNull(GraphQLString) }
       },
       resolve(parent, args) {

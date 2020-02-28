@@ -10,7 +10,8 @@ const {
   GraphQLList,
   GraphQLID,
   GraphQLString,
-  GraphQLInt
+  GraphQLInt,
+  GraphQLFloat
 } = graphql;
 
 const UserType = new GraphQLObjectType({
@@ -21,8 +22,8 @@ const UserType = new GraphQLObjectType({
     fname: { type: GraphQLString },
     lname: { type: GraphQLString },
     age: { type: GraphQLInt },
-    height: { type: GraphQLNumber },
-    weight: { type: GraphQLNumber },
+    height: { type: GraphQLInt },
+    weight: { type: GraphQLFloat },
     measurementSystem: { type: GraphQLString },
     runs: {
       type: GraphQLList(RunsType),

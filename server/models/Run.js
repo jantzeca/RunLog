@@ -15,4 +15,4 @@ const runSchema = new Schema({
   shoeId: String
 });
 
-module.exports = model('Runs', runSchema);
+module.exports = model('Run', runSchema);
