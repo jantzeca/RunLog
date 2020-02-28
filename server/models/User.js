@@ -23,7 +23,8 @@ const userSchema = new Schema(
     runs: String
   },
   {
-    timestamps: true
+    timestamps: true,
+    collection: 'users'
   }
 );
 

@@ -12,10 +12,10 @@ const app = express();
 app.use(cors());
 app.use(morgan('dev'));
 app.use('/graphql', graphqlHTTP({ schema, graphiql: true }));
-app.use(express.json()); // Maybe don't need this if using gql
+app.use(express.json());
 
 mongoose
-  .connect(`mongodb://localhost/runLog`, {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useFindAndModify: false,
     useUnifiedTopology: true
