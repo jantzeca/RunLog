@@ -7,7 +7,8 @@
   "scripts": {
     "client": "cd client && yarn run start",
     "serve": "cd server && yarn run serve",
-    "dev": "concurrently \"yarn run client\" \"yarn run serve\""
+    "dev": "concurrently \"yarn run client\" \"yarn run serve\"",
+    "debug": "cd server && yarn run debug"
   },
   "dependencies": {
     "concurrently": "^5.1.0"

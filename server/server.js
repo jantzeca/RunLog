@@ -4,14 +4,15 @@ const mongoose = require('mongoose');
 const graphqlHTTP = require('express-graphql');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+const schema = require('./gql/RootQuery');
 
 dotenv.config();
 
 const app = express();
 app.use(cors());
-app.use('/graphql', graphqlHTTP({ schema, graphiql: true }));
-app.use(express.json());
 app.use(morgan('dev'));
+app.use('/graphql', graphqlHTTP({ schema, graphiql: true }));
+app.use(express.json()); // Maybe don't need this if using gql
 
 mongoose
   .connect(`mongodb://localhost/runLog`, {

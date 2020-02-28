@@ -4,8 +4,8 @@
   "main": "server.js",
   "license": "MIT",
   "scripts": {
-    "serve": "nodemon --inspect=5858 server.js",
-    "serve:watch": "nodemon"
+    "serve": "nodemon server.js",
+    "debug": "nodemon --inspect server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

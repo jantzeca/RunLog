@@ -17,16 +17,13 @@ const UserType = new GraphQLObjectType({
   name: 'User',
   fields: () => ({
     id: { type: GraphQLID },
+    email: { type: GraphQLString },
     fname: { type: GraphQLString },
     lname: { type: GraphQLString },
     age: { type: GraphQLInt },
     height: { type: GraphQLNumber },
     weight: { type: GraphQLNumber },
     measurementSystem: { type: GraphQLString },
-    parentId: {
-      // Not sure I really like this
-      type: GraphQLID
-    },
     runs: {
       type: GraphQLList(RunsType),
       resolve(parent, args) {

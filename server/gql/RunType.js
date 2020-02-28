@@ -2,13 +2,13 @@ const graphql = require('graphql');
 const ShoeType = require('./ShoeType');
 const Shoe = require('../models/Shoe');
 
-const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt } = graphql;
+const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLFloat } = graphql;
 
 const RunType = new GraphQLObjectType({
   name: 'Run',
   fields: () => ({
     id: { type: GraphQLID },
-    distance: { type: GraphQLInt },
+    distance: { type: GraphQLFloat },
     time: { type: GraphQLString },
     location: { type: GraphQLString },
     timeOfDay: { type: GraphQLString },
