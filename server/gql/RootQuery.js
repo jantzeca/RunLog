@@ -68,6 +68,7 @@ const RunType = new GraphQLObjectType({
     shoe: {
       type: ShoeType,
       resolve(parent, args) {
+        console.log(parent.shoeId);
         return Shoe.findById(parent.shoeId);
       }
     }
@@ -157,7 +158,7 @@ const Mutation = new GraphQLObjectType({
           time,
           location,
           timeOfDay,
-          shoe,
+          shoeId,
           userId
         });
         return run.save();
@@ -227,6 +228,13 @@ const Mutation = new GraphQLObjectType({
       resolve(parent, args) {
         Shoe.update({ _id: args.id }, { $inc: { distance: args.distance } });
         return Shoe.findById(args.id);
+      }
+    },
+    deleteUser: {
+      type: UserType,
+      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
+      async resolve(parent, args) {
+        return await User.findByIdAndDelete(args.id);
       }
     }
   }
