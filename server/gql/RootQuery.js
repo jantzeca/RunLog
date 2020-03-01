@@ -240,32 +240,42 @@ const Mutation = new GraphQLObjectType({
       async resolve(parent, args) {
         return await User.findByIdAndDelete(args.id);
       }
+    },
+    updateUser: {
+      type: UserType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        email: { type: GraphQLString },
+        fname: { type: GraphQLString },
+        lname: { type: GraphQLString },
+        age: { type: GraphQLInt },
+        height: { type: GraphQLInt },
+        weight: { type: GraphQLFloat },
+        measurementSystem: { type: GraphQLString }
+      },
+      async resolve(parent, args) {
+        const {
+          email,
+          fname,
+          lname,
+          age,
+          height,
+          weight,
+          measurementSystem
+        } = args;
+        let updates = {};
+        if (email) updates.email = email;
+        if (fname) updates.fname = fname;
+        if (lname) updates.lname = lname;
+        if (age) updates.age = age;
+        if (height) updates.height = height;
+        if (weight) updates.weight = weight;
+        if (measurementSystem) updates.measurementSystem = measurementSystem;
+        return await User.findByIdAndUpdate({ _id: args.id }, updates, {
+          new: true
+        });
+      }
     }
-    // updateUser: {
-    //   type: UserType,
-    //   args: {
-    //     id: { type: new GraphQLNonNull(GraphQLID) },
-    //     updates: {
-    //       type: new GraphQLObjectType({
-    //         name: 'Updates',
-    //         fields: () => ({
-    //           email: { type: new GraphQLNonNull(GraphQLString) },
-    //           fname: { type: new GraphQLNonNull(GraphQLString) },
-    //           lname: { type: GraphQLString },
-    //           age: { type: GraphQLInt },
-    //           height: { type: GraphQLInt },
-    //           weight: { type: GraphQLFloat },
-    //           measurementSystem: { type: new GraphQLNonNull(GraphQLString) }
-    //         })
-    //       })
-    //     }
-    //   },
-    //   async resolve(parent, args) {
-    //     return await User.findByIdAndUpdate({ _id: args.id }, args.updates, {
-    //       new: true
-    //     });
-    //   }
-    // }
   }
 });
 
