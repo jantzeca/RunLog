@@ -224,10 +224,14 @@ const Mutation = new GraphQLObjectType({
         id: { type: new GraphQLNonNull(GraphQLID) },
         distance: { type: new GraphQLNonNull(GraphQLFloat) }
       },
-      // TODO: Fix this to update every time it's called
-      resolve(parent, args) {
-        Shoe.update({ _id: args.id }, { $inc: { distance: args.distance } });
-        return Shoe.findById(args.id);
+      async resolve(parent, args) {
+        console.log(await Shoe.findById(args.id));
+        const output = await Shoe.findByIdAndUpdate(
+          { _id: args.id },
+          { $inc: { distance: args.distance } }
+        );
+        console.log(output);
+        return await Shoe.findById(args.id);
       }
     },
     deleteUser: {
@@ -237,6 +241,31 @@ const Mutation = new GraphQLObjectType({
         return await User.findByIdAndDelete(args.id);
       }
     }
+    // updateUser: {
+    //   type: UserType,
+    //   args: {
+    //     id: { type: new GraphQLNonNull(GraphQLID) },
+    //     updates: {
+    //       type: new GraphQLObjectType({
+    //         name: 'Updates',
+    //         fields: () => ({
+    //           email: { type: new GraphQLNonNull(GraphQLString) },
+    //           fname: { type: new GraphQLNonNull(GraphQLString) },
+    //           lname: { type: GraphQLString },
+    //           age: { type: GraphQLInt },
+    //           height: { type: GraphQLInt },
+    //           weight: { type: GraphQLFloat },
+    //           measurementSystem: { type: new GraphQLNonNull(GraphQLString) }
+    //         })
+    //       })
+    //     }
+    //   },
+    //   async resolve(parent, args) {
+    //     return await User.findByIdAndUpdate({ _id: args.id }, args.updates, {
+    //       new: true
+    //     });
+    //   }
+    // }
   }
 });
 
