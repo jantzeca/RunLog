@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const graphqlHTTP = require('express-graphql');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
-const schema = require('./gql/RootQuery');
+const schema = require('./gql/Schema');
 
 dotenv.config();
 
