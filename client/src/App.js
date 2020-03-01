@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
 import Navbar from './components/Layout/Navbar';
-import Profile from './components/Profile';
+import Profile from './components/Profile/Profile';
 
 const App = () => {
   const client = new ApolloClient({
