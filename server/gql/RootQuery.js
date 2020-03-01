@@ -254,23 +254,18 @@ const Mutation = new GraphQLObjectType({
         measurementSystem: { type: GraphQLString }
       },
       async resolve(parent, args) {
-        const {
-          email,
-          fname,
-          lname,
-          age,
-          height,
-          weight,
-          measurementSystem
-        } = args;
-        let updates = {};
-        if (email) updates.email = email;
-        if (fname) updates.fname = fname;
-        if (lname) updates.lname = lname;
-        if (age) updates.age = age;
-        if (height) updates.height = height;
-        if (weight) updates.weight = weight;
-        if (measurementSystem) updates.measurementSystem = measurementSystem;
+        let updates = {
+          email: args.email,
+          fname: args.fname,
+          lname: args.lname,
+          age: args.age,
+          height: args.height,
+          weight: args.weight,
+          measurementSystem: args.measurementSystem
+        };
+        Object.keys(updates).forEach(
+          key => updates[key] == null && delete updates[key]
+        );
         return await User.findByIdAndUpdate({ _id: args.id }, updates, {
           new: true
         });
