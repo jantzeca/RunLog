@@ -1,0 +1,36 @@
+.navbar {
+  nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: indigo;
+    height: 3.5rem;
+    color: #fff;
+    
+    h1 {
+      font-size: 2rem;
+      margin: 7px 0 0 30px;
+      padding: 7;
+    }
+  
+    ul {
+      display: flex;
+      flex-direction: row;
+      list-style: none;
+      font-size: 1rem;
+    }
+  
+    ul li {
+      margin-right: 20px;
+    }
+  
+    ul li:last-child {
+      margin-right: 40px;
+    }
+  
+    ul li a {
+      text-decoration: none;
+      color: #fff;
+    }
+  }
+}
