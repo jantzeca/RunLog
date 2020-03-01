@@ -30,20 +30,20 @@ const UserType = new GraphQLObjectType({
     run: {
       type: RunType,
       args: { runId: { type: GraphQLID } },
-      resolve(parent, args) {
-        return Run.findById(args.runId);
+      async resolve(_, args) {
+        return await Run.findById(args.runId);
       }
     },
     runs: {
       type: GraphQLList(RunType),
-      resolve(parent, args) {
-        return Run.find({ userId: parent._id });
+      async resolve(parent, _) {
+        return await Run.find({ userId: parent._id });
       }
     },
     shoes: {
       type: GraphQLList(ShoeType),
-      resolve(parent, args) {
-        return Shoe.find({ ownerId: parent._id });
+      async resolve(parent, _) {
+        return await Shoe.find({ ownerId: parent._id });
       }
     }
   })
@@ -61,15 +61,14 @@ const RunType = new GraphQLObjectType({
     userId: { type: GraphQLID },
     user: {
       type: UserType,
-      resolve(parent, args) {
-        return User.findById(parent.userId);
+      async resolve(parent, _) {
+        return await User.findById(parent.userId);
       }
     },
     shoe: {
       type: ShoeType,
-      resolve(parent, args) {
-        console.log(parent.shoeId);
-        return Shoe.findById(parent.shoeId);
+      async resolve(parent, _) {
+        return await Shoe.findById(parent.shoeId);
       }
     }
   })
@@ -86,8 +85,8 @@ const ShoeType = new GraphQLObjectType({
     ownerId: { type: GraphQLID },
     owner: {
       type: UserType,
-      resolve(parent, args) {
-        return User.findById(parent.ownerId);
+      async resolve(parent, _) {
+        return await User.findById(parent.ownerId);
       }
     }
   }
@@ -99,40 +98,40 @@ const RootQuery = new GraphQLObjectType({
     user: {
       type: UserType,
       args: { id: { type: GraphQLID } },
-      resolve(parent, args) {
-        return User.findById(args.id);
+      async resolve(_, args) {
+        return await User.findById(args.id);
       }
     },
     run: {
       type: RunType,
       args: { id: { type: GraphQLID } },
-      resolve(parent, args) {
-        return Run.findById(args.id);
+      async resolve(_, args) {
+        return await Run.findById(args.id);
       }
     },
     runs: {
       type: GraphQLList(RunType),
-      resolve(parent, args) {
-        return Run.find({ userId: parent._id });
+      async resolve(parent, _) {
+        return await Run.find({ userId: parent._id });
       }
     },
     shoe: {
       type: ShoeType,
       args: { id: { type: GraphQLID } },
-      resolve(parent, args) {
-        return Shoe.findById(args.id);
+      async resolve(_, args) {
+        return await Shoe.findById(args.id);
       }
     },
     shoes: {
       type: GraphQLList(ShoeType),
-      resolve(parent, args) {
-        return Shoe.find({ ownerId: parent._id });
+      async resolve(parent, _) {
+        return await Shoe.find({ ownerId: parent._id });
       }
     },
     owner: {
       type: UserType,
-      resolve(parent, args) {
-        return User.findById(parent.ownerId);
+      async resolve(parent, _) {
+        return await User.findById(parent.ownerId);
       }
     }
   }
@@ -151,7 +150,7 @@ const Mutation = new GraphQLObjectType({
         shoeId: { type: GraphQLID },
         userId: { type: GraphQLID }
       },
-      resolve(parent, args) {
+      async resolve(_, args) {
         const { distance, time, location, timeOfDay, shoeId, userId } = args;
         const run = new Run({
           distance,
@@ -161,7 +160,7 @@ const Mutation = new GraphQLObjectType({
           shoeId,
           userId
         });
-        return run.save();
+        return await run.save();
       }
     },
     addUser: {
@@ -175,7 +174,7 @@ const Mutation = new GraphQLObjectType({
         weight: { type: GraphQLFloat },
         measurementSystem: { type: new GraphQLNonNull(GraphQLString) }
       },
-      resolve(parent, args) {
+      async resolve(_, args) {
         const {
           email,
           fname,
@@ -194,7 +193,7 @@ const Mutation = new GraphQLObjectType({
           weight,
           measurementSystem
         });
-        return user.save();
+        return await user.save();
       }
     },
     addShoe: {
@@ -206,7 +205,7 @@ const Mutation = new GraphQLObjectType({
         distance: { type: new GraphQLNonNull(GraphQLFloat) },
         ownerId: { type: new GraphQLNonNull(GraphQLID) }
       },
-      resolve(parent, args) {
+      async resolve(_, args) {
         const { brand, model, size, distance, ownerId } = args;
         const shoe = new Shoe({
           brand,
@@ -215,7 +214,7 @@ const Mutation = new GraphQLObjectType({
           distance,
           ownerId
         });
-        return shoe.save();
+        return await shoe.save();
       }
     },
     addDistanceToShoe: {
@@ -225,19 +224,17 @@ const Mutation = new GraphQLObjectType({
         distance: { type: new GraphQLNonNull(GraphQLFloat) }
       },
       async resolve(parent, args) {
-        console.log(await Shoe.findById(args.id));
-        const output = await Shoe.findByIdAndUpdate(
+        await Shoe.findByIdAndUpdate(
           { _id: args.id },
           { $inc: { distance: args.distance } }
         );
-        console.log(output);
         return await Shoe.findById(args.id);
       }
     },
     deleteUser: {
       type: UserType,
       args: { id: { type: new GraphQLNonNull(GraphQLID) } },
-      async resolve(parent, args) {
+      async resolve(_, args) {
         return await User.findByIdAndDelete(args.id);
       }
     },
@@ -253,7 +250,7 @@ const Mutation = new GraphQLObjectType({
         weight: { type: GraphQLFloat },
         measurementSystem: { type: GraphQLString }
       },
-      async resolve(parent, args) {
+      async resolve(_, args) {
         let updates = {
           email: args.email,
           fname: args.fname,
@@ -267,6 +264,60 @@ const Mutation = new GraphQLObjectType({
           key => updates[key] == null && delete updates[key]
         );
         return await User.findByIdAndUpdate({ _id: args.id }, updates, {
+          new: true
+        });
+      }
+    },
+    updateRun: {
+      type: RunType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        distance: { type: GraphQLFloat },
+        time: { type: GraphQLString },
+        location: { type: GraphQLString },
+        timeOfDay: { type: GraphQLString },
+        shoeId: { type: GraphQLID },
+        userId: { type: GraphQLID }
+      },
+      async resolve(_, args) {
+        let updates = {
+          distance: args.distance,
+          time: args.time,
+          location: args.location,
+          timeOfDay: args.timeOfDay,
+          shoeId: args.shoeId,
+          userId: args.userId
+        };
+        Object.keys(updates).forEach(
+          key => updates[key] == null && delete updates[key]
+        );
+        return await Run.findByIdAndUpdate({ _id: args.id }, updates, {
+          new: true
+        });
+      }
+    },
+    updateShoe: {
+      type: ShoeType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLID) },
+        brand: { type: GraphQLString },
+        model: { type: GraphQLString },
+        size: { type: GraphQLFloat },
+        distance: { type: GraphQLFloat },
+        ownerId: { type: GraphQLID }
+      },
+      async resolve(_, args) {
+        let updates = {
+          brand: args.brand,
+          model: args.model,
+          size: args.size,
+          distance: args.distance,
+          ownerId: args.ownerId
+        };
+        Object.keys(updates).forEach(
+          key => updates[key] == null && delete updates[key]
+        );
+        return await Shoe.findByIdAndUpdate({ _id: args.id }, updates, {
           new: true
         });
       }
