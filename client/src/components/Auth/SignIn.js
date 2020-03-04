@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { signIn } from '../../Store/Actions/AuthActions';
 import { Redirect } from 'react-router-dom';
 
+import './styles/signin.scss';
+
 class SignIn extends Component {
   state = {
     email: '',
@@ -34,8 +36,8 @@ class SignIn extends Component {
             <label htmlFor='password'>Password</label>
             <input type='password' name='password' id='password' />
           </div>
-          <div className='input-field'>
-            <button className='btn'></button>
+          <div className='submit-field'>
+            <button className='btn'>Sign In</button>
             <div className='center'>
               {authError ? <p>{authError}</p> : null}
             </div>
