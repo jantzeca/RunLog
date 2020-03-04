@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import SignedInLinks from './SignedInLinks';
+import SignedOutLinks from './SignedOutLinks';
 import './styles/navbar.scss'
 
 const Navbar = () => {
@@ -8,18 +10,8 @@ const Navbar = () => {
       <h1>
         RunLog
       </h1>
-      <ul>
-        <li>
-          <Link to='/' className='link-item'>
-            About
-          </Link>
-        </li>
-        <li>
-          <Link to='/' className='link-item'>
-            Log In
-          </Link>
-        </li>
-      </ul>
+      {/* <SignedInLinks /> */}
+      <SignedOutLinks />
     </nav>
   )
 }

@@ -4,6 +4,8 @@ import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
 import Navbar from './components/Layout/Navbar';
 import Profile from './components/Profile/Profile';
+import SignIn from './components/Auth/SignIn';
+// import SignUp from './components/Auth/SignUp';
 
 const App = () => {
   const client = new ApolloClient({
@@ -16,7 +18,8 @@ const App = () => {
           <Navbar />
           <Switch>
             {/* <Route exact path="/" component={Dashboard} /> */}
-            <Route exact path="/profile/:id" component={Profile} />
+            <Route exact path='/profile/:id' component={Profile} />
+            <Route path='/signin' component={SignIn} />
           </Switch>
       </BrowserRouter>
     </ApolloProvider>
