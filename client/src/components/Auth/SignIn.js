@@ -26,14 +26,24 @@ class SignIn extends Component {
           <h5>Sign In</h5>
           <div className='input-field'>
             <label htmlFor='email'>Email</label>
-            <input type='email' name='email' id='email' />
+            <input
+              type='email'
+              name='email'
+              id='email'
+              onChange={this.handleChange}
+            />
           </div>
           <div className='input-field'>
             <label htmlFor='password'>Password</label>
-            <input type='password' name='password' id='password' />
+            <input
+              type='password'
+              name='password'
+              id='password'
+              onChange={this.handleChange}
+            />
           </div>
           <div className='submit-field'>
-            <button className='btn'>Sign In</button>
+            <input className='btn' type='submit' value='submit' />
             <div className='center'>
               {authError ? <p>{authError}</p> : null}
             </div>

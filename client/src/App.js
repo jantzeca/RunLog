@@ -15,15 +15,16 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <BrowserRouter>
-          <Navbar />
-          <Switch>
-            {/* <Route exact path="/" component={Dashboard} /> */}
-            <Route exact path='/profile/:id' component={Profile} />
-            <Route path='/signin' component={SignIn} />
-          </Switch>
+        <Navbar />
+        <Switch>
+          {/* <Route exact path="/" component={Dashboard} /> */}
+          <Route exact path='/profile/:id' component={Profile} />
+          <Route path='/signin' component={SignIn} />
+          {/* <Route path='/signup' component={SignUp} /> */}
+        </Switch>
       </BrowserRouter>
     </ApolloProvider>
   );
-}
+};
 
 export default App;
