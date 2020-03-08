@@ -22,6 +22,14 @@ const {
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
+    users: {
+      type: GraphQLList(UserType),
+      async resolve(parent, args) {
+        // Potentially add isAdmin property to user
+        // schema to be allowed to use this query
+        return await User.find();
+      }
+    },
     user: {
       type: UserType,
       args: { id: { type: GraphQLID } },

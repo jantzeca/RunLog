@@ -1,31 +1,16 @@
-import React, { useState /* , useEffect */ /*, useContext */ } from 'react';
+import React from 'react';
 import { Query } from 'react-apollo';
 import { Redirect } from 'react-router-dom';
 import { getUserQuery } from '../../graphql/userQueries';
 import './styles/profile.scss';
 
 const Profile = props => {
-  let [id, setId] = useState(props.match.params.id); // May not even need this
-
-  // let [state, setState] = useState({
-  //   email: '',
-  //   fname: '',
-  //   lname: '',
-  //   age: 0,
-  //   height: 0,
-  //   weight: 0.0,
-  //   measurementSystem: ''
-  // });
-
-  // useEffect(() => {
-  //   const { id } = props.match.params;
-  //   setId(id);
-  // }, [props]);
+  console.log(props);
 
   return (
     <div className='container'>
       <h1>Profile</h1>
-      <Query query={getUserQuery} variables={{ id }}>
+      <Query query={getUserQuery} variables={{ id: props.match.params.id }}>
         {({ loading, error, data }) => {
           if (error) {
             alert(error);

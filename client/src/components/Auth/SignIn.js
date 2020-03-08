@@ -1,57 +1,53 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import './styles/signin.scss';
 
-class SignIn extends Component {
-  state = {
-    email: '',
-    password: ''
+const SignIn = () => {
+  let [email, setEmail] = useState('');
+  let [password, setPassword] = useState('');
+  let authError = false;
+
+  const handleChange = e => handler => {
+    handler(e.target.value);
   };
 
-  handleChange = e => {
-    this.setState({
-      [e.target.id]: e.target.value
-    });
-  };
-
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
+    // useContext thing here
+    // maybe add jwt
+    console.log(email, password);
+    authError = false;
   };
 
-  render() {
-    const { authError } = this.props;
-    return (
-      <div className='container'>
-        <form>
-          <h5>Sign In</h5>
-          <div className='input-field'>
-            <label htmlFor='email'>Email</label>
-            <input
-              type='email'
-              name='email'
-              id='email'
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className='input-field'>
-            <label htmlFor='password'>Password</label>
-            <input
-              type='password'
-              name='password'
-              id='password'
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className='submit-field'>
-            <input className='btn' type='submit' value='submit' />
-            <div className='center'>
-              {authError ? <p>{authError}</p> : null}
-            </div>
-          </div>
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className='container'>
+      <form onSubmit={handleSubmit}>
+        <h5>Sign In</h5>
+        <div className='input-field'>
+          <label htmlFor='email'>Email</label>
+          <input
+            type='email'
+            name='email'
+            id='email'
+            onChange={handleChange(setEmail)}
+          />
+        </div>
+        <div className='input-field'>
+          <label htmlFor='password'>Password</label>
+          <input
+            type='password'
+            name='password'
+            id='password'
+            onChange={handleChange(setPassword)}
+          />
+        </div>
+        <div className='submit-field'>
+          <input className='btn' type='submit' value='submit' />
+          <div className='center'>{authError ? <p>{authError}</p> : null}</div>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 export default SignIn;
