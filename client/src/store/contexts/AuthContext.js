@@ -1,21 +1,24 @@
-// import React, { createContext, useReducer, useEffect } from 'react';
-// import { authReducer } from '../reducers/authReducer';
+import React, { createContext, useReducer } from 'react';
+import { authReducer } from '../reducers/authReducer';
 
-// export const AuthContext = createContext();
+export const AuthContext = createContext();
 
-// const AuthContextProvider = props => {
-//   const [auth, dispatch] = useReducer(authReducer, '', () => {
-//     console.log('test');
-//   });
-//   useEffect(() => {
-//     localStorage.setItem('authToken', auth);
-//   }, [auth]);
+const AuthContextProvider = props => {
+  const [auth, dispatch] = useReducer(authReducer, { authError: null });
 
-//   return (
-//     <AuthContextProvider value={{ auth, dispatch }}>
-//       {props.children}
-//     </AuthContextProvider>
-//   );
-// };
+  const checkAuth = credentials => {
+    if (credentials) {
+      dispatch({ type: 'SIGN_IN_SUCCESSFUL' });
+    } else {
+      dispatch({ type: 'SIGN_IN_SUCCESSFUL' });
+    }
+  };
 
-// export default AuthContextProvider;
+  return (
+    <AuthContextProvider value={{ auth, dispatch, checkAuth }}>
+      {props.children}
+    </AuthContextProvider>
+  );
+};
+
+export default AuthContextProvider;
