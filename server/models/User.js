@@ -18,6 +18,14 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
+    password: {
+      type: String,
+      required: true
+    },
+    isAdmin: {
+      type: Boolean,
+      required: true
+    },
     // F.K.'s
     shoes: String,
     runs: String

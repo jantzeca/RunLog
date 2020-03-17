@@ -6,7 +6,12 @@ const Shoe = require('../models/Shoe');
 const User = require('../models/User');
 
 // GraphQLTypes
-const { UserType, RunType, ShoeType } = require('./TypeDefs');
+const {
+  UserType,
+  RunType,
+  ShoeType,
+  MeasurementSystemType
+} = require('./TypeDefs');
 
 const {
   GraphQLObjectType,
@@ -16,7 +21,8 @@ const {
   GraphQLID,
   GraphQLSchema,
   GraphQLList,
-  GraphQLNonNull
+  GraphQLNonNull,
+  GraphQLBoolean
 } = graphql;
 
 const RootQuery = new GraphQLObjectType({
@@ -24,7 +30,7 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     users: {
       type: GraphQLList(UserType),
-      async resolve(parent, args) {
+      async resolve(parent, args, context) {
         // Potentially add isAdmin property to user
         // schema to be allowed to use this query
         return await User.find();
@@ -102,31 +108,37 @@ const Mutation = new GraphQLObjectType({
       type: UserType,
       args: {
         email: { type: new GraphQLNonNull(GraphQLString) },
+        password: { type: new GraphQLNonNull(GraphQLString) },
         fname: { type: new GraphQLNonNull(GraphQLString) },
         lname: { type: GraphQLString },
         age: { type: GraphQLInt },
         height: { type: GraphQLInt },
         weight: { type: GraphQLFloat },
-        measurementSystem: { type: new GraphQLNonNull(GraphQLString) }
+        measurementSystem: { type: new GraphQLNonNull(MeasurementSystemType) },
+        isAdmin: { type: GraphQLNonNull(GraphQLBoolean) }
       },
       async resolve(_, args) {
         const {
           email,
+          password,
           fname,
           lname,
           age,
           height,
           weight,
-          measurementSystem
+          measurementSystem,
+          isAdmin
         } = args;
         const user = new User({
           email,
+          password,
           fname,
           lname,
           age,
           height,
           weight,
-          measurementSystem
+          measurementSystem,
+          isAdmin
         });
         return await user.save();
       }
@@ -178,22 +190,26 @@ const Mutation = new GraphQLObjectType({
       args: {
         id: { type: new GraphQLNonNull(GraphQLID) },
         email: { type: GraphQLString },
+        password: { type: GraphQLString },
         fname: { type: GraphQLString },
         lname: { type: GraphQLString },
         age: { type: GraphQLInt },
         height: { type: GraphQLInt },
         weight: { type: GraphQLFloat },
-        measurementSystem: { type: GraphQLString }
+        measurementSystem: { type: MeasurementSystemType },
+        isAdmin: { type: GraphQLBoolean }
       },
       async resolve(_, args) {
         let updates = {
           email: args.email,
+          password: args.password,
           fname: args.fname,
           lname: args.lname,
           age: args.age,
           height: args.height,
           weight: args.weight,
-          measurementSystem: args.measurementSystem
+          measurementSystem: args.measurementSystem,
+          isAdmin: args.isAdmin
         };
         Object.keys(updates).forEach(
           key => updates[key] == null && delete updates[key]

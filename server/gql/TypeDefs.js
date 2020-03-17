@@ -11,7 +11,9 @@ const {
   GraphQLInt,
   GraphQLFloat,
   GraphQLID,
-  GraphQLList
+  GraphQLList,
+  GraphQLBoolean,
+  GraphQLEnumType // Look into this
 } = graphql;
 
 const UserType = new GraphQLObjectType({
@@ -19,12 +21,15 @@ const UserType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     email: { type: GraphQLString },
+    password: { type: GraphQLString },
     fname: { type: GraphQLString },
     lname: { type: GraphQLString },
     age: { type: GraphQLInt },
     height: { type: GraphQLInt },
     weight: { type: GraphQLFloat },
-    measurementSystem: { type: GraphQLString },
+    measurementSystem: { type: MeasurementSystemType },
+    isAdmin: { type: GraphQLBoolean },
+    token: { type: GraphQLString },
     run: {
       type: RunType,
       args: { runId: { type: GraphQLID } },
@@ -90,4 +95,16 @@ const ShoeType = new GraphQLObjectType({
   }
 });
 
-module.exports = { UserType, RunType, ShoeType };
+const MeasurementSystemType = new GraphQLEnumType({
+  name: 'MeasurementSystem',
+  values: {
+    METRIC: {
+      value: 'metric'
+    },
+    IMPERIAL: {
+      value: 'imperial'
+    }
+  }
+});
+
+module.exports = { UserType, RunType, ShoeType, MeasurementSystemType };
