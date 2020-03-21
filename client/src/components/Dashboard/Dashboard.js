@@ -1,6 +1,6 @@
 import React from 'react';
 import { Query } from 'react-apollo';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 import { getAllUsers } from '../../graphql/userQueries';
 
 import './styles/dashboard.scss';

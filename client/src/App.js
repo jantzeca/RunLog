@@ -11,17 +11,28 @@ import SignIn from './components/Auth/SignIn';
 
 const App = () => {
   const client = new ApolloClient({
-    uri: '/graphql'
+    uri: '/api'
   });
 
+  const authClient = new ApolloClient({
+    uri: '/auth'
+  });
+
+  const authTokenHandler = token => {
+    console.log(token);
+  };
+
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={authClient}>
       <BrowserRouter>
         <Navbar />
         <Switch>
           <Route exact path='/' component={Dashboard} />
           {/* <AuthContextProvider> */}
-          <Route path='/signin' component={SignIn} />
+          <Route
+            path='/signin'
+            component={() => <SignIn {...{ authClient, authTokenHandler }} />}
+          />
           {/* <Route path='/signup' component={SignUp} /> */}
           {/* </AuthContextProvider> */}
           <Route exact path='/profile/:id' component={Profile} />

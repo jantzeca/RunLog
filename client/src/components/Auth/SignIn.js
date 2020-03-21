@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
+import { SignIn as signin } from '../../graphql/userQueries';
 
 import './styles/signin.scss';
 
-const SignIn = () => {
-  let [email, setEmail] = useState('');
-  let [password, setPassword] = useState('');
-  let authError = false;
+const SignIn = ({ authClient, authTokenHandler }) => {
+  let [email, setEmail] = useState('chris@gmail.com');
+  let [password, setPassword] = useState('testPassword');
 
   const handleChange = e => handler => {
     handler(e.target.value);
@@ -14,9 +14,14 @@ const SignIn = () => {
   const handleSubmit = e => {
     e.preventDefault();
     // useContext thing here
-    // maybe add jwt
-    console.log(email, password);
-    authError = false;
+    authClient
+      .query({
+        query: signin,
+        variables: { email, password }
+      })
+      .then(res => {
+        authTokenHandler(res.data.signin.token);
+      });
   };
 
   return (
@@ -43,7 +48,7 @@ const SignIn = () => {
         </div>
         <div className='submit-field'>
           <input className='btn' type='submit' value='submit' />
-          <div className='center'>{authError ? <p>{authError}</p> : null}</div>
+          {/* <div className='center'>{authError ? <p>{authError}</p> : null}</div> */}
         </div>
       </form>
     </div>
