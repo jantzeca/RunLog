@@ -5,8 +5,6 @@ import { getUserQuery } from '../../graphql/userQueries';
 import './styles/profile.scss';
 
 const Profile = props => {
-  console.log(props);
-
   return (
     <div className='container'>
       <h1>Profile</h1>

@@ -7,7 +7,7 @@ const SignIn = ({ authClient, authTokenHandler }) => {
   let [email, setEmail] = useState('chris@gmail.com');
   let [password, setPassword] = useState('testPassword');
 
-  const handleChange = e => handler => {
+  const handleChange = handler => e => {
     handler(e.target.value);
   };
 
@@ -21,6 +21,9 @@ const SignIn = ({ authClient, authTokenHandler }) => {
       })
       .then(res => {
         authTokenHandler(res.data.signin.token);
+        setEmail('');
+        setPassword('');
+        // props.history.push('/');
       });
   };
 
@@ -35,6 +38,7 @@ const SignIn = ({ authClient, authTokenHandler }) => {
             name='email'
             id='email'
             onChange={handleChange(setEmail)}
+            value={email}
           />
         </div>
         <div className='input-field'>
@@ -44,6 +48,7 @@ const SignIn = ({ authClient, authTokenHandler }) => {
             name='password'
             id='password'
             onChange={handleChange(setPassword)}
+            value={password}
           />
         </div>
         <div className='submit-field'>
