@@ -18,7 +18,7 @@ const shoeSchema = new Schema(
       type: Number,
       required: true
     },
-    ownerId: {
+    userId: {
       type: String,
       required: true
     }
