@@ -5,7 +5,7 @@ const { ApolloServer, AuthenticationError } = require('apollo-server-express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 
 const User = require('./models/User');
 const { typeDefs, resolvers } = require('./gql/Schema');
