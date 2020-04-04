@@ -7,9 +7,9 @@ const query = `
 `;
 
 const resolver = {
-  shoe: async (parent, args) => await Shoe.find({ shoeId: parent.shoeId }),
+  shoe: async (parent, args) => await Shoe.findById(parent.shoeId),
   shoeById: async (parent, { id }) => await Shoe.findById(id),
-  shoes: async (parent, args) => await Shoe.find({ ownerId: parent._id })
+  shoes: async (parent, args) => await Shoe.find({ userId: parent._id })
 };
 
 module.exports = {

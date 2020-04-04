@@ -1,16 +1,4 @@
-// TODO: Separate this out a bit
-/**
- * Ideas:
- *   Make a file for each mutation, typeDef, and query and try to categorize them into run, team, shoe related
- */
-
 const { gql } = require('apollo-server-express');
-const { filterUpdates } = require('./utils');
-
-// Mongo Schemas
-const Run = require('../models/Run');
-const Shoe = require('../models/Shoe');
-const User = require('../models/User');
 
 const RunSchema = require('./Run/runSchema');
 const UserSchema = require('./User/userSchema');
@@ -44,6 +32,18 @@ const resolvers = {
     ...RunSchema.mutationResolver,
     ...UserSchema.mutationResolver,
     ...ShoeSchema.mutationResolver
+  },
+  User: {
+    ...RunSchema.queryResolver,
+    shoeById: ShoeSchema.queryResolver.shoeById,
+    shoes: ShoeSchema.queryResolver.shoes
+  },
+  Run: {
+    user: UserSchema.queryResolver.user,
+    shoe: ShoeSchema.queryResolver.shoe
+  },
+  Shoe: {
+    user: UserSchema.queryResolver.user
   }
 };
 
