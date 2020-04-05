@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { ajaxRequest } from '../../utils/utils';
-// import { SignIn as signin } from '../../graphql/userQueries';
+// import { ajaxRequest } from '../../utils/utils';
 
 import './styles/signin.scss';
 
@@ -19,70 +18,27 @@ const SignIn = ({ authTokenHandler }) => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      let body = JSON.stringify({
+      const res = await fetch('/get-token', {
+        method: 'post',
+        body: JSON.stringify({
+          email,
+          password
+        }),
         headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
-        },
-        query: `query signin($email: String, $password: String) {
-            signin(email: $email, password: $password) {
-              id
-              token
-            }
-          }`,
-        variables: { email, password }
+          'Content-Type': 'application/json'
+        }
       });
-      let headers = {};
-      let requestBody = { body, headers, method: 'POST' };
-      let res = await ajaxRequest(requestBody, email, password);
-      console.log(res);
-      // let res = await fetch('/auth', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     Accept: 'application/json'
-      //   },
-      //   body: JSON.stringify({
-      //     query: `
-      //       query signin($email: String, $password: String) {
-      //         signin(email: $email, password: $password) {
-      //           id
-      //           token
-      //         }
-      //       }
-      //     `,
-      //     variables: { email, password }
-      //   })
-      // });
-      // res = await res.json();
-      authTokenHandler(res.data.signin.token);
+      const body = await res.json();
+      authTokenHandler(body.token);
       setEmail('');
       setPassword('');
-
-      let { from } = location.state || {
-        from: { pathname: '/authDashboard' }
+      const { from } = location.state || {
+        from: { pathname: '/adminDashboard' }
       };
       history.replace(from);
     } catch (error) {
-      // Custom error alert popup
       console.error(error);
     }
-    // authClient
-    //   .query({
-    //     query: signin,
-    //     variables: { email, password }
-    //   })
-    //   .then(res => {
-    //     authTokenHandler(res.data.signin.token);
-    //     setEmail('');
-    //     setPassword('');
-    //   })
-    //   .then(() => {
-    //     let { from } = location.state || {
-    //       from: { pathname: '/authDashboard' }
-    //     };
-    //     history.replace(from);
-    //   });
   };
 
   return (

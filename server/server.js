@@ -13,7 +13,10 @@ const { typeDefs, resolvers } = require('./gql/Schema');
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'localhost:3000',
+  credentials: true
+}));
 app.use(morgan('dev'));
 app.use(express.json());
 

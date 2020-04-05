@@ -23,12 +23,3 @@ export const getUserQuery = gql`
     }
   }
 `;
-
-export const SignIn = gql`
-  query signin($email: String, $password: String) {
-    signin(email: $email, password: $password) {
-      id
-      token
-    }
-  }
-`;
