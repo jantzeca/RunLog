@@ -11,6 +11,7 @@
     "debug": "cd server && yarn run debug"
   },
   "dependencies": {
-    "concurrently": "^5.1.0"
+    "concurrently": "^5.1.0",
+    "jsonwebtoken": "^8.5.1"
   }
 }

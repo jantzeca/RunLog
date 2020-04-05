@@ -14,7 +14,10 @@ const runSchema = new Schema(
     timeOfDay: String,
     // F.K.'s
     shoeId: String,
-    userId: String
+    userId: {
+      type: String,
+      required: true
+    }
   },
   {
     collection: 'runs'
