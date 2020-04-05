@@ -10,8 +10,9 @@
     width: 100%;
     height: 100%;
     margin-top: 10vh;
+    margin-left: 60px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
 
     .loading {
@@ -48,7 +49,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 30px;
+    padding: 10px 30px;
     width: 100%;
 
     .user-card {
