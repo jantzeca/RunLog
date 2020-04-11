@@ -12,11 +12,20 @@ const { typeDefs, resolvers } = require('./gql/Schema');
 
 dotenv.config();
 
+const allowCrossDomain = (req, res, next) => {
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+}
+
 const app = express();
 app.use(cors({
   origin: 'localhost:3000',
+  'Access-Control-Allow-Origin': 'localhost:3000',
   credentials: true
 }));
+app.use(allowCrossDomain)
 app.use(morgan('dev'));
 app.use(express.json());
 

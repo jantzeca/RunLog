@@ -3,23 +3,23 @@ import { Query } from 'react-apollo';
 import { useParams } from 'react-router-dom';
 import { getUserQuery } from '../../graphql/userQueries';
 import ErrorAlert from '../Error/ErrorAlert';
+import Loading from '../Loading/Loading';
 import './styles/profile.scss';
 
 const Profile = () => {
-  let { id } = useParams();
+  const { id } = useParams();
   return (
     <div className='container'>
       <h1>Profile</h1>
       <Query query={getUserQuery} variables={{ id }}>
         {({ loading, error, data }) => {
           if (error) {
-            alert(error);
-            return <ErrorAlert message={'Error message to display'} />
+            return <ErrorAlert message={error.message} />
           }
-          const dataToReturn = loading ? (
-            <h4>Loading...</h4>
-            ) : (
-              <>
+          return loading ? (
+            <Loading />
+          ) : (
+            <>
               <h3 className='name'>
                 {data.userById.fname} {data.userById.lname}
               </h3>
@@ -27,7 +27,6 @@ const Profile = () => {
               <h4>{data.userById.email}</h4>
             </>
           );
-          return dataToReturn;
         }}
       </Query>
     </div>

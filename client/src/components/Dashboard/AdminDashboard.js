@@ -2,10 +2,11 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import { useHistory, useLocation } from 'react-router-dom';
 import { getAllUsers } from '../../graphql/userQueries';
+import Loading from '../Loading/Loading';
+import ErrorAlert from '../Error/ErrorAlert';
 
-import './styles/dashboard.scss';
+import './styles/adminDashboard.scss';
 
-// TODO: make this admin dashboard later
 const AdminDashboard = props => {
   let history = useHistory();
   let location = useLocation();
@@ -16,12 +17,11 @@ const AdminDashboard = props => {
       <Query query={getAllUsers}>
         {({ loading, error, data }) => {
           if (error) {
-            alert(error);
+            console.error(error);
+            return <ErrorAlert message={error.message} />
           }
           return loading ? (
-            <div className='loading-container'>
-              <div className='loading'></div>
-            </div>
+            <Loading />
           ) : (
             <div className='users-container'>
               {data.users.map(user => {
@@ -34,7 +34,6 @@ const AdminDashboard = props => {
                         from: { pathname: `user/profile/${user.id}` }
                       };
                       history.replace(from);
-                      // props.history.push(`/profile/${user.id}`)
                     }}
                   >
                   <p>

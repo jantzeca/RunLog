@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './styles/error.scss';
+import './styles/errorAlert.scss';
 
 const ErrorAlert = ({ message }) => {
   return (
