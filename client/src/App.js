@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
 import Navbar from './components/Layout/Navbar';
-import Dashboard from './components/Dashboard/AdminDashboard';
+import AdminDashboard from './components/Admin/AdminDashboard';
 import Profile from './components/Profile/Profile';
 import SignIn from './components/Auth/SignIn';
 // import SignUp from './components/Auth/SignUp';
@@ -35,7 +35,7 @@ const App = () => {
               <SignUp />
             </Route> */}
             <AdminRoute path='/adminDashboard'>
-              <Dashboard />
+              <AdminDashboard />
             </AdminRoute>
             <PrivateRoute path='/user/profile/:id'>
               <Profile />
