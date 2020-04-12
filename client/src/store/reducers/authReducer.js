@@ -1,15 +1,25 @@
+import { SIGN_IN_SUCCESSFUL, SIGN_IN_ERROR, SIGN_OUT } from './types';
+
 export const authReducer = (state, action) => {
   switch (action.type) {
-    case 'SIGN_IN_SUCCESSFUL':
+    case SIGN_IN_SUCCESSFUL:
       return {
         ...state,
-        authError: null
+        authenticated: action.authenticated,
+        isAdmin: action.isAdmin
       };
-    case 'SIGN_IN_ERROR': {
+    case SIGN_IN_ERROR:
       return {
         ...state,
-        authError: 'Sign in failed'
+        authError: action.message
       };
-    }
+    case SIGN_OUT:
+      return {
+        ...state,
+        authenticated: false,
+        isAdmin: false
+      }
+    default:
+      return state;
   }
 };

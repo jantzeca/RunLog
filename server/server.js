@@ -65,12 +65,13 @@ app.post('/get-token', async (req, res) => {
     // const match = await bcrypt.compare(password, user[0].password);
     if (match) {
       const token = jwt.sign(
-        { email: user.email, id: user.id },
+        { email: user[0].email, id: user[0].id },
         process.env.SECRETKEY
       );
       res.send({
         success: true,
-        token: `Bearer ${token}`
+        token: `Bearer ${token}`,
+        isAdmin: user[0].isAdmin
       });
     } else {
       res.status(401).send({
