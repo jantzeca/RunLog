@@ -5,8 +5,7 @@ import { AuthContext } from '../../store/contexts/authContext';
 import './styles/navbar.scss';
 
 const Navbar = () => {
-  let { auth } = useContext(AuthContext);
-  console.log(auth);
+  const { auth } = useContext(AuthContext);
 
   return (
     <nav className='navbar'>
