@@ -7,13 +7,9 @@ import Dashboard from './components/Dashboard/AdminDashboard';
 import Profile from './components/Profile/Profile';
 import SignIn from './components/Auth/SignIn';
 // import SignUp from './components/Auth/SignUp';
-// import AuthContextProvider from './store/contexts/AuthContext';
+import AuthContextProvider from './store/contexts/authContext';
 
 const App = () => {
-  const authTokenHandler = token => {
-    localStorage.setItem('token', token);
-  };
-
   const client = new ApolloClient({
     uri: '/graphql',
     request: operation => {
@@ -28,23 +24,25 @@ const App = () => {
 
   return (
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        <Navbar />
-        <Switch>
-          <Route path='/signin'>
-            <SignIn authTokenHandler={authTokenHandler} />
-          </Route>
-          {/* <Route path='/signup'>
-            <SignUp />
-          </Route> */}
-          <PrivateRoute path='/adminDashboard'>
-            <Dashboard />
-          </PrivateRoute>
-          <PrivateRoute path='/user/profile/:id'>
-            <Profile />
-          </PrivateRoute>
-        </Switch>
-      </BrowserRouter>
+      <AuthContextProvider>
+        <BrowserRouter>
+          <Navbar />
+          <Switch>
+            <Route path='/signin'>
+              <SignIn />
+            </Route>
+            {/* <Route path='/signup'>
+              <SignUp />
+            </Route> */}
+            <PrivateRoute path='/adminDashboard'>
+              <Dashboard />
+            </PrivateRoute>
+            <PrivateRoute path='/user/profile/:id'>
+              <Profile />
+            </PrivateRoute>
+          </Switch>
+        </BrowserRouter>
+      </AuthContextProvider>
     </ApolloProvider>
   );
 };

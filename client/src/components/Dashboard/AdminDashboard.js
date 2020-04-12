@@ -7,7 +7,7 @@ import ErrorAlert from '../Error/ErrorAlert';
 
 import './styles/adminDashboard.scss';
 
-const AdminDashboard = props => {
+const AdminDashboard = () => {
   let history = useHistory();
   let location = useLocation();
 

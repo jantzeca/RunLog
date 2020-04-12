@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
+
+import { AuthContext } from '../../store/contexts/authContext';
 
 import './styles/signin.scss';
 
-const SignIn = ({ authTokenHandler }) => {
+const SignIn = () => {
   let [email, setEmail] = useState('chris@gmail.com');
   let [password, setPassword] = useState('testPassword');
+  let { authStatus, setToken } = useContext(AuthContext);
 
   let history = useHistory();
   let location = useLocation();
@@ -28,13 +31,21 @@ const SignIn = ({ authTokenHandler }) => {
         }
       });
       const body = await res.json();
-      authTokenHandler(body.token);
-      setEmail('');
-      setPassword('');
-      const { from } = location.state || {
-        from: { pathname: '/adminDashboard' }
-      };
-      history.replace(from);
+      if (body.success) {
+        setToken(body.token);
+        authStatus(true, body.isAdmin, null);
+        setEmail('');
+        setPassword('');
+        const { from } = location.state || {
+          from: { pathname: '/adminDashboard' }
+        };
+        history.replace(from);
+      } else {
+        console.log(body.message);
+        authStatus(false, false, body.message);
+        setEmail('');
+        setPassword('');
+      }
     } catch (error) {
       console.error(error);
     }

@@ -1,15 +1,17 @@
-import React from 'react';
-// import { Link } from 'react-router-dom';
-// import SignedInLinks from './SignedInLinks';
+import React, {useContext} from 'react';
+import SignedInLinks from './SignedInLinks';
 import SignedOutLinks from './SignedOutLinks';
+import { AuthContext } from '../../store/contexts/authContext';
 import './styles/navbar.scss';
 
 const Navbar = () => {
+  let { auth } = useContext(AuthContext);
+  console.log(auth);
+
   return (
     <nav className='navbar'>
       <h1>RunLog</h1>
-      {/* <SignedInLinks /> */}
-      <SignedOutLinks />
+      {auth.authenticated ? (<SignedInLinks />) : (<SignedOutLinks />)}
     </nav>
   );
 };
