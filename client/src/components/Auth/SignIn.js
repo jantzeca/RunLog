@@ -6,7 +6,7 @@ import { AuthContext } from '../../store/contexts/authContext';
 import './styles/signin.scss';
 
 const SignIn = () => {
-  let [email, setEmail] = useState('chris@gmail.com');
+  let [email, setEmail] = useState('chris@gmail.com'); // Temp test user account for development
   let [password, setPassword] = useState('testPassword');
   let { authStatus, setToken } = useContext(AuthContext);
 
@@ -77,7 +77,6 @@ const SignIn = () => {
         </div>
         <div className='submit-field'>
           <input className='btn' type='submit' value='submit' />
-          {/* <div className='center'>{authError ? <p>{authError}</p> : null}</div> */}
         </div>
       </form>
     </div>

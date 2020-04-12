@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
@@ -7,7 +7,7 @@ import Dashboard from './components/Dashboard/AdminDashboard';
 import Profile from './components/Profile/Profile';
 import SignIn from './components/Auth/SignIn';
 // import SignUp from './components/Auth/SignUp';
-import AuthContextProvider from './store/contexts/authContext';
+import AuthContextProvider, { AuthContext } from './store/contexts/authContext';
 
 const App = () => {
   const client = new ApolloClient({
@@ -34,9 +34,9 @@ const App = () => {
             {/* <Route path='/signup'>
               <SignUp />
             </Route> */}
-            <PrivateRoute path='/adminDashboard'>
+            <AdminRoute path='/adminDashboard'>
               <Dashboard />
-            </PrivateRoute>
+            </AdminRoute>
             <PrivateRoute path='/user/profile/:id'>
               <Profile />
             </PrivateRoute>
@@ -47,11 +47,33 @@ const App = () => {
   );
 };
 
-const PrivateRoute = ({ children, ...rest }) => (
-  <Route
+const AdminRoute = ({ children, ...rest }) => {
+  const { auth } = useContext(AuthContext);
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        auth.authenticated && auth.isAdmin ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/signin',
+              state: { from: location }
+            }}
+          />
+        )
+      }
+    />
+  )
+};
+
+const PrivateRoute = ({ children, ...rest }) => {
+  const { auth } = useContext(AuthContext);
+  return (<Route
     {...rest}
     render={({ location }) =>
-      localStorage.getItem('token') ? (
+      auth.authenticated ? (
         children
       ) : (
         <Redirect
@@ -62,7 +84,7 @@ const PrivateRoute = ({ children, ...rest }) => (
         />
       )
     }
-  />
-);
+  />)
+};
 
 export default App;
