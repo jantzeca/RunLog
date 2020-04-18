@@ -14,8 +14,8 @@ const ErrorAlert = ({ message }) => {
   );
 };
 
-ErrorAlert.proptypes = {
-  message: PropTypes.string,
+ErrorAlert.propTypes = {
+  message: PropTypes.string
 };
 
 export default ErrorAlert;
