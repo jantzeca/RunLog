@@ -27,6 +27,7 @@ const AuthContextProvider = (props) => {
 
   const signOut = () => {
     dispatch({ type: SIGN_OUT });
+    localStorage.setItem('token', null);
   };
 
   return (

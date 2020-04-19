@@ -47,6 +47,10 @@ const App = () => {
   );
 };
 
+/**
+ * @param {Component} children - The component to be mounted if authenticated
+ * @param rest - Any other Attributes to be added to the Route component
+ */
 const AdminRoute = ({ children, ...rest }) => {
   const { auth } = useContext(AuthContext);
   return (
@@ -68,6 +72,10 @@ const AdminRoute = ({ children, ...rest }) => {
   )
 };
 
+/**
+ * @param {Component} children - The component to be mounted if authenticated
+ * @param rest - Any other Attributes to be added to the Route component
+ */
 const PrivateRoute = ({ children, ...rest }) => {
   const { auth } = useContext(AuthContext);
   return (<Route
