@@ -8,7 +8,7 @@ const mutation = `
 `;
 
 const resolver = {
-  addRun: async (parent, args) => {
+  addRun: async (_, args) => {
     const { distance, time, location, timeOfDay, shoeId, userId } = args;
     const run = new Run({
       distance,
@@ -20,7 +20,7 @@ const resolver = {
     });
     return await run.save();
   },
-  updateRun: async (parent, args) => {
+  updateRun: async (_, args) => {
     const inputs = {
       distance: args.distance,
       time: args.time,
@@ -32,11 +32,12 @@ const resolver = {
     const updates = filterUpdates(inputs);
     return await Run.findByIdAndUpdate({ _id: args.id }, updates, { new: true });
   },
-  deleteRun: async (parent, args) => 
+  deleteRun: async (_, args) => (
     await Run.findByIdAndDelete(args.id)
-}
+  )
+};
 
 module.exports = {
   mutation,
   mutationResolver: resolver
-}
+};

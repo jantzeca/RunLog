@@ -6,11 +6,11 @@ const query = `
 `;
 
 const resolver = {
-  run: async (parent, { id }) => await Run.findById(id),
-  runs: async (parent, args) => await Run.find({ userId: parent._id })
-}
+  run: async (_, { id }) => await Run.findById(id),
+  runs: async (parent, _) => await Run.find({ userId: parent._id })
+};
 
 module.exports = {
   query,
   queryResolver: resolver
-}
+};
