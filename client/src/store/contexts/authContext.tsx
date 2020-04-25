@@ -1,8 +1,17 @@
 import React, { createContext, useReducer } from 'react';
 import { authReducer } from '../reducers/authReducer';
 import { SIGN_IN_SUCCESSFUL, SIGN_IN_ERROR, SIGN_OUT } from '../reducers/types';
+import { any } from 'prop-types';
 
-export const AuthContext = createContext();
+type contextProps = {
+  auth: any,
+  dispatch: React.Dispatch<any>,
+  authStatus: Function,
+  setToken: Function,
+  signOut: Function
+};
+
+export const AuthContext = createContext<Partial<contextProps>>({});
 
 const initState = {
   authError: null,
@@ -10,14 +19,14 @@ const initState = {
   isAdmin: false,
 };
 
-const AuthContextProvider = (props) => {
+const AuthContextProvider = ({ children }: { children: JSX.Element }) => {
   const [auth, dispatch] = useReducer(authReducer, initState);
 
-  const setToken = (token) => {
+  const setToken = (token: string) => {
     localStorage.setItem('token', token);
   };
 
-  const authStatus = (signedIn, isAdmin, message) => {
+  const authStatus = (signedIn: boolean, isAdmin: boolean, message?: string|undefined) => {
     if (signedIn) {
       dispatch({ type: SIGN_IN_SUCCESSFUL, authenticated: true, isAdmin });
     } else {
@@ -27,14 +36,14 @@ const AuthContextProvider = (props) => {
 
   const signOut = () => {
     dispatch({ type: SIGN_OUT });
-    localStorage.setItem('token', null);
+    localStorage.setItem('token', '');
   };
 
   return (
     <AuthContext.Provider
       value={{ auth, dispatch, authStatus, setToken, signOut }}
     >
-      {props.children}
+      {children}
     </AuthContext.Provider>
   );
 };

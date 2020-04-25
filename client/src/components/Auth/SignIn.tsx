@@ -6,43 +6,48 @@ import { AuthContext } from '../../store/contexts/authContext';
 import './styles/signin.scss';
 
 const SignIn = () => {
-  let [email, setEmail] = useState('chris@gmail.com'); // Temp test user account for development
-  let [password, setPassword] = useState('testPassword');
+  let [email, setEmail] = useState<string>('chris@gmail.com'); // Temp test user account for development
+  let [password, setPassword] = useState<string>('testPassword');
   let { authStatus, setToken } = useContext(AuthContext);
 
   let history = useHistory();
   let location = useLocation();
 
-  const handleChange = handler => e => {
+  const handleChange = (
+    handler: React.Dispatch<React.SetStateAction<string>>
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => {
     handler(e.target.value);
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const res = await fetch('/get-token', {
         method: 'post',
         body: JSON.stringify({
           email,
-          password
+          password,
         }),
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       });
       const body = await res.json();
       if (body.success) {
-        setToken(body.token);
-        authStatus(true, body.isAdmin, null);
         setEmail('');
         setPassword('');
-        const { from } = location.state || {
-          from: { pathname: '/adminDashboard' }
-        };
-        history.replace(from);
+        if (setToken && authStatus) {
+          setToken(body.token);
+          authStatus(true, body.isAdmin);
+          const { from }: any = location.state || {
+            from: { pathname: '/adminDashboard' },
+          };
+          history.replace(from);
+        }
       } else {
-        console.log(body.message);
-        authStatus(false, false, body.message);
+        if (authStatus) {
+          authStatus(false, false, body.message);
+        }
         setEmail('');
         setPassword('');
       }

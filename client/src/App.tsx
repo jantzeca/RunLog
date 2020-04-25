@@ -12,14 +12,14 @@ import AuthContextProvider, { AuthContext } from './store/contexts/authContext';
 const App = () => {
   const client = new ApolloClient({
     uri: '/graphql',
-    request: operation => {
+    request: (operation) => {
       const token = localStorage.getItem('token');
       operation.setContext({
         headers: {
-          authorization: token ? token : ''
-        }
+          authorization: token ? token : '',
+        },
       });
-    }
+    },
   });
 
   return (
@@ -51,10 +51,18 @@ const App = () => {
  * @param {Component} children - The component to be mounted if authenticated
  * @param rest - Any other Attributes to be added to the Route component
  */
-const AdminRoute = ({ children, ...rest }) => {
+const AdminRoute = ({
+  children,
+  path,
+  ...rest
+}: {
+  children: JSX.Element;
+  path: string;
+}) => {
   const { auth } = useContext(AuthContext);
   return (
     <Route
+      path={path}
       {...rest}
       render={({ location }) =>
         auth.authenticated && auth.isAdmin ? (
@@ -63,36 +71,46 @@ const AdminRoute = ({ children, ...rest }) => {
           <Redirect
             to={{
               pathname: '/signin',
-              state: { from: location }
+              state: { from: location },
             }}
           />
         )
       }
     />
-  )
+  );
 };
 
 /**
  * @param {Component} children - The component to be mounted if authenticated
  * @param rest - Any other Attributes to be added to the Route component
  */
-const PrivateRoute = ({ children, ...rest }) => {
+const PrivateRoute = ({
+  children,
+  path,
+  ...rest
+}: {
+  children: JSX.Element;
+  path: string;
+}) => {
   const { auth } = useContext(AuthContext);
-  return (<Route
-    {...rest}
-    render={({ location }) =>
-      auth.authenticated ? (
-        children
-      ) : (
-        <Redirect
-          to={{
-            pathname: '/signin',
-            state: { from: location }
-          }}
-        />
-      )
-    }
-  />)
+  return (
+    <Route
+      path={path}
+      {...rest}
+      render={({ location }) =>
+        auth.authenticated ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/signin',
+              state: { from: location },
+            }}
+          />
+        )
+      }
+    />
+  );
 };
 
 export default App;
