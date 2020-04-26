@@ -9,7 +9,7 @@ import SignIn from './components/Auth/SignIn';
 // import SignUp from './components/Auth/SignUp';
 import AuthContextProvider, { AuthContext } from './store/contexts/authContext';
 
-const App = () => {
+const App: React.FC = (): JSX.Element => {
   const client = new ApolloClient({
     uri: '/graphql',
     request: (operation) => {
@@ -49,9 +49,10 @@ const App = () => {
 
 /**
  * @param {Component} children - The component to be mounted if authenticated
+ * @param {string} path - Route for component to be rendered
  * @param rest - Any other Attributes to be added to the Route component
  */
-const AdminRoute = ({ children, path, ...rest }: { children: JSX.Element; path: string }) => {
+const AdminRoute: React.FC<any> = ({ children, path, ...rest }: { children: JSX.Element; path: string }): JSX.Element => {
   const { auth } = useContext(AuthContext);
   return (
     <Route
@@ -75,6 +76,7 @@ const AdminRoute = ({ children, path, ...rest }: { children: JSX.Element; path: 
 
 /**
  * @param {Component} children - The component to be mounted if authenticated
+ * @param {string} path - Route for component to be rendered
  * @param rest - Any other Attributes to be added to the Route component
  */
 const PrivateRoute = ({ children, path, ...rest}: { children: JSX.Element; path: string; }) => {
