@@ -16,7 +16,7 @@ const App = () => {
       const token = localStorage.getItem('token');
       operation.setContext({
         headers: {
-          authorization: token ? token : '',
+          authorization: token || '',
         },
       });
     },
@@ -51,14 +51,7 @@ const App = () => {
  * @param {Component} children - The component to be mounted if authenticated
  * @param rest - Any other Attributes to be added to the Route component
  */
-const AdminRoute = ({
-  children,
-  path,
-  ...rest
-}: {
-  children: JSX.Element;
-  path: string;
-}) => {
+const AdminRoute = ({ children, path, ...rest }: { children: JSX.Element; path: string }) => {
   const { auth } = useContext(AuthContext);
   return (
     <Route
@@ -84,14 +77,7 @@ const AdminRoute = ({
  * @param {Component} children - The component to be mounted if authenticated
  * @param rest - Any other Attributes to be added to the Route component
  */
-const PrivateRoute = ({
-  children,
-  path,
-  ...rest
-}: {
-  children: JSX.Element;
-  path: string;
-}) => {
+const PrivateRoute = ({ children, path, ...rest}: { children: JSX.Element; path: string; }) => {
   const { auth } = useContext(AuthContext);
   return (
     <Route
