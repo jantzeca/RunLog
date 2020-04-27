@@ -17,7 +17,7 @@ const App = (): JSX.Element => {
       operation.setContext({
         headers: {
           authorization: token || '',
-        },
+        }
       });
     },
   });
@@ -52,7 +52,7 @@ const App = (): JSX.Element => {
  * @param {string} path - Route for component to be rendered
  * @param rest - Any other Attributes to be added to the Route component
  */
-const AdminRoute = ({ children, path, ...rest }: { children: JSX.Element; path: string }): JSX.Element => {
+const AdminRoute = ({ children, path, ...rest }: { children: JSX.Element; path: string }) => {
   const { auth } = useContext(AuthContext);
   return (
     <Route

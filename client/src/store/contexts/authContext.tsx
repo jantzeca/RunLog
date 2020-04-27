@@ -1,7 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import { authReducer } from '../reducers/authReducer';
 import { SIGN_IN_SUCCESSFUL, SIGN_IN_ERROR, SIGN_OUT } from '../reducers/types';
-import { any } from 'prop-types';
 
 type contextProps = {
   auth: any,
