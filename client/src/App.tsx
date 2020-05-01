@@ -9,7 +9,7 @@ import SignIn from './components/Auth/SignIn';
 // import SignUp from './components/Auth/SignUp';
 import AuthContextProvider, { AuthContext } from './store/contexts/authContext';
 
-const App = (): JSX.Element => {
+const App = () => {
   const client = new ApolloClient({
     uri: '/graphql',
     request: (operation) => {
@@ -59,7 +59,7 @@ const AdminRoute = ({ children, path, ...rest }: { children: JSX.Element; path: 
       path={path}
       {...rest}
       render={({ location }) =>
-        auth.authenticated && auth.isAdmin ? (
+        (auth.authenticated && auth.isAdmin) ? (
           children
         ) : (
           <Redirect
