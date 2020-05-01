@@ -7,7 +7,7 @@ const mutation = `
 `;
 
 const resolver = {
-  addShoe: async (parent, args) => {
+  addShoe: async (_, args) => {
     const { brand, model, size, distance, ownerId } = args;
     const shoe = new Shoe({
       brand,
@@ -18,14 +18,14 @@ const resolver = {
     });
     return await shoe.save();
   },
-  addDistanceToShoe: async (parent, args) => {
+  addDistanceToShoe: async (_, args) => {
     await Shoe.findByIdAndUpdate(
       { _id: args.id },
       { $inc: { distance: args.distance } }
     );
     return await Shoe.findById(args.id);
   },
-  updateShoe: async (parent, args) => {
+  updateShoe: async (_, args) => {
     const inputs = {
       brand: args.brand,
       model: args.model,
