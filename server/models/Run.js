@@ -12,6 +12,7 @@ const runSchema = new Schema(
     },
     location: String,
     timeOfDay: String,
+    comment: String,
     // F.K.'s
     shoeId: String,
     userId: {
