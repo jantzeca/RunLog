@@ -8,6 +8,7 @@ const typeDef = `
     time: String!
     location: String
     timeOfDay: String
+    comment: String
     shoeId: String
     userId: String!
     user: User
