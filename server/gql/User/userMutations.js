@@ -49,7 +49,7 @@ const resolver = {
     const updates = filterUpdates(inputs);
     return await User.findByIdAndUpdate({ _id: args.id }, updates, {
       new: true
-    }); // TODO: Make sure that new: true is what I actually want and doesn't delete anything
+    });
   },
   setNewCurrentShoe: async(_, args) => (
     await User.findByIdAndUpdate({ _id: args.id }, { currentShoeId: args.currentShoeId }, { new: true })
