@@ -7,13 +7,20 @@ const typeDef = `
     distance: Float!
     time: String!
     location: String
-    timeOfDay: String
+    timeOfDay: TimeOfDay
     date: String
     comment: String
     shoeId: String
     userId: String!
     user: User
     shoe: Shoe
+  }
+
+  enum TimeOfDay {
+    morning
+    afternoon
+    evening
+    night
   }
 `;
 
