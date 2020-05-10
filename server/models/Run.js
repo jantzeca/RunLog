@@ -11,6 +11,7 @@ const runSchema = new Schema(
       required: true
     },
     location: String,
+    date: String,
     timeOfDay: String,
     comment: String,
     // F.K.'s
@@ -21,6 +22,7 @@ const runSchema = new Schema(
     }
   },
   {
+    timestamps: true,
     collection: 'runs'
   }
 );

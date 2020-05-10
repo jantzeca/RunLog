@@ -1,5 +1,5 @@
-const { mutation, mutationResolver } = require('./mutations');
-const { query, queryResolver } = require('./queries');
+const { mutation, mutationResolver } = require('./userMutations');
+const { query, queryResolver } = require('./userQueries');
 
 const typeDef = `
   type User {
@@ -13,6 +13,7 @@ const typeDef = `
     weight: Float
     measurementSystem: MeasurementSystem!
     isAdmin: Boolean
+    currentShoeId: ID
     run(runId: ID!): Run
     runs: [Run]
     shoeById(shoeId: ID!): Shoe

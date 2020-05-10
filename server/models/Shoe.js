@@ -18,12 +18,13 @@ const shoeSchema = new Schema(
       type: Number,
       required: true
     },
-    userId: {
+    ownerId: {
       type: String,
       required: true
     }
   },
   {
+    timestamps: true,
     collection: 'shoes'
   }
 );

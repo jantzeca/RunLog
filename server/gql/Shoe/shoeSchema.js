@@ -1,12 +1,12 @@
-const { mutation, mutationResolver } = require('./mutations');
-const { query, queryResolver } = require('./queries');
+const { mutation, mutationResolver } = require('./shoeMutations');
+const { query, queryResolver } = require('./shoeQueries');
 
 const typeDef = `
   type Shoe {
     id: ID!
     brand: String!
     model: String!
-    size: Float!
+    size: Float
     distance: Float!
     userId: ID!
     user: User

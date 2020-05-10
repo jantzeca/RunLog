@@ -1,7 +1,7 @@
 const Shoe = require('../../models/Shoe');
 
 const mutation = `
-  addShoe(brand: String!, model: String!, size: Float!, distance: Float!, ownerId: ID!): Shoe
+  addShoe(brand: String!, model: String!, size: Float, distance: Float!, ownerId: ID!): Shoe
   addDistanceToShoe(id: ID!, distance: Float!): Shoe
   updateShoe(id: ID!, brand: String, model: String, size: Float, distance: Float, ownerId: ID): Shoe
 `;

@@ -10,6 +10,8 @@ const resolver = {
   runs: async (parent, _) => await Run.find({ userId: parent._id })
 };
 
+// TODO: Query for a run by date, etc.
+
 module.exports = {
   query,
   queryResolver: resolver

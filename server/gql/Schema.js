@@ -1,4 +1,5 @@
 const { gql } = require('apollo-server-express');
+const { GraphQLScalarType } = require('graphql');
 
 const RunSchema = require('./Run/runSchema');
 const UserSchema = require('./User/userSchema');

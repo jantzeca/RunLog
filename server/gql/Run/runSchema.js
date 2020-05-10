@@ -1,5 +1,5 @@
-const { mutation, mutationResolver } = require('./mutations');
-const { query, queryResolver } = require('./queries');
+const { mutation, mutationResolver } = require('./runMutations');
+const { query, queryResolver } = require('./runQueries');
 
 const typeDef = `
   type Run {
@@ -8,6 +8,7 @@ const typeDef = `
     time: String!
     location: String
     timeOfDay: String
+    date: String
     comment: String
     shoeId: String
     userId: String!
