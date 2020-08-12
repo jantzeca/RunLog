@@ -6,12 +6,12 @@ import { AuthContext } from '../../store/contexts/authContext';
 import './styles/signin.scss';
 
 const SignIn = () => {
-  let [email, setEmail] = useState<string>('');
-  let [password, setPassword] = useState<string>('');
-  let { authStatus, setToken } = useContext(AuthContext);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const { authStatus, setToken } = useContext(AuthContext);
 
-  let history = useHistory();
-  let location = useLocation();
+  const history = useHistory();
+  const location = useLocation();
 
   const handleChange = (
     handler: React.Dispatch<React.SetStateAction<string>>
