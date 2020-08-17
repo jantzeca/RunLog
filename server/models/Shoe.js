@@ -18,7 +18,7 @@ const shoeSchema = new Schema(
       type: Number,
       required: true
     },
-    default: {
+    isDefault: {
       type: Boolean,
       required: true
     },
