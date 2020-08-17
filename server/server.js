@@ -31,7 +31,6 @@ mongoose
   .catch(err => console.error(err.message));
 
 const context = ({ req }) => {
-  console.log(req.body);
   token = req.headers.authorization || '';
   const splitToken = token.split(' ')[1];
   try {
@@ -55,8 +54,6 @@ app.post('/get-token', async (req, res) => {
   const { email, password } = req.body;
   const user = await User.find({ email });
   if (user && user[0]) {
-    console.log('user:');
-    console.log(user);
     const match = password === user[0].password;
     // TODO: Setup a hash for the password
     // const match = await bcrypt.compare(password, user[0].password);
