@@ -11,6 +11,7 @@ const typeDef = `
     age: Int
     height: Float
     weight: Float
+    measurementSystem: MeasurementSystem!
     isAdmin: Boolean
     currentShoeId: ID
     run(runId: ID!): Run
@@ -18,6 +19,11 @@ const typeDef = `
     runsByTitle: [Run]
     shoeById(shoeId: ID!): Shoe
     shoes: [Shoe]
+  }
+
+  enum MeasurementSystem {
+    metric
+    imperial
   }
 `;
 

@@ -14,6 +14,10 @@ const userSchema = new Schema(
     age: Number,
     height: Number,
     weight: Number,
+    measurementSystem: {
+      type: String,
+      required: true
+    },
     password: {
       type: String,
       required: true

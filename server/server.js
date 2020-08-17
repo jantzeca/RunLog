@@ -31,12 +31,15 @@ mongoose
   .catch(err => console.error(err.message));
 
 const context = ({ req }) => {
+  console.log(req.body);
   token = req.headers.authorization || '';
   const splitToken = token.split(' ')[1];
   try {
     jwt.verify(splitToken, process.env.SECRETKEY);
   } catch (error) {
-    throw new AuthenticationError('Auth Token is invalid, please log in');
+    if (req.body.query.indexOf('addUser') === -1) { // addUser mutation Should not require an existing account
+      throw new AuthenticationError('Auth Token is invalid, please log in');
+    }
   }
 };
 
@@ -51,7 +54,9 @@ server.applyMiddleware({ app });
 app.post('/get-token', async (req, res) => {
   const { email, password } = req.body;
   const user = await User.find({ email });
-  if (user) {
+  if (user && user[0]) {
+    console.log('user:');
+    console.log(user);
     const match = password === user[0].password;
     // TODO: Setup a hash for the password
     // const match = await bcrypt.compare(password, user[0].password);

@@ -2,9 +2,9 @@ const User = require('../../models/User');
 const filterUpdates = require('../utils');
 
 const mutation = `
-  addUser(email: String!, password: String!, fname: String!, lname: String, age: Int, height: Int, weight: Float, isAdmin: Boolean!, currentShoeId: ID): User
+  addUser(email: String!, password: String!, fname: String!, lname: String, age: Int, height: Int, weight: Float, measurementSystem: MeasurementSystem!, isAdmin: Boolean!, currentShoeId: ID): User
   deleteUser(id: ID!): User
-  updateUser(id: ID!, email: String, password: String, fname: String, lname: String, age: Int, height: Int, weight: Float, isAdmin: Boolean, currentShoeId: ID): User
+  updateUser(id: ID!, email: String, password: String, fname: String, lname: String, age: Int, height: Int, weight: Float, measurementSystem: MeasurementSystem!, isAdmin: Boolean, currentShoeId: ID): User
   setNewCurrentShoe(id: ID!, currentShoeId: ID!): User
 `;
 
@@ -19,6 +19,7 @@ const resolver = {
         age: args.age,
         height: args.height,
         weight: args.weight,
+        measurementSystem: args.measurementSystem,
         isAdmin: args.isAdmin,
         currentShoeId: args.currentShoeId
       });
@@ -41,6 +42,7 @@ const resolver = {
       age: args.age,
       height: args.height,
       weight: args.weight,
+      measurementSystem: args.measurementSystem,
       isAdmin: args.isAdmin,
       currentShoeId: args.currentShoeId
     };
