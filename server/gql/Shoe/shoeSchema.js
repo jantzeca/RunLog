@@ -8,6 +8,7 @@ const typeDef = `
     model: String!
     size: Float
     distance: Float!
+    default: Boolean!
     userId: ID!
     user: User
   }

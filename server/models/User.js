@@ -15,6 +15,8 @@ const userSchema = new Schema(
     height: Number,
     weight: Number,
     measurementSystem: {
+      // TODO: Remove this measurement system thing from here and add it to a run.
+      // Update the graphql enum to accept km, mi, m, yd to accomodate shorter workouts.
       type: String,
       required: true
     },

@@ -15,13 +15,6 @@ const typeDef = `
     user: User
     shoe: Shoe
   }
-
-  enum TimeOfDay {
-    morning
-    afternoon
-    evening
-    night
-  }
 `;
 
 module.exports = {
