@@ -15,6 +15,7 @@ const typeDef = `
     currentShoeId: ID
     run(runId: ID!): Run
     runs: [Run]
+    runsByTitle: [Run]
     shoeById(shoeId: ID!): Shoe
     shoes: [Shoe]
   }
