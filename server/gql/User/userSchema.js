@@ -8,7 +8,8 @@ const typeDef = `
     password: String!
     fname: String!
     lname: String
-    age: Int
+    birthday: String
+    gender: String
     height: Float
     weight: Float
     measurementSystem: MeasurementSystem!
