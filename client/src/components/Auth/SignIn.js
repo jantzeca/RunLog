@@ -6,8 +6,8 @@ import { AuthContext } from '../../store/contexts/authContext';
 import './styles/signin.scss';
 
 const SignIn = () => {
-  let [email, setEmail] = useState('chris@gmail.com'); // Temp test user account for development
-  let [password, setPassword] = useState('testPassword');
+  let [email, setEmail] = useState('');
+  let [password, setPassword] = useState('');
   let { authStatus, setToken } = useContext(AuthContext);
 
   let history = useHistory();
