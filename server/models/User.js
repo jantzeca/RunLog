@@ -11,7 +11,8 @@ const userSchema = new Schema(
       required: true
     },
     lname: String,
-    age: Number,
+    birthday: String,
+    gender: String,
     height: Number,
     weight: Number,
     measurementSystem: {

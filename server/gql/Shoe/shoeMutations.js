@@ -1,19 +1,20 @@
 const Shoe = require('../../models/Shoe');
 
 const mutation = `
-  addShoe(brand: String!, model: String!, size: Float, distance: Float!, ownerId: ID!): Shoe
+  addShoe(brand: String!, model: String!, size: Float, distance: Float!, isDefault: Boolean!, ownerId: ID!): Shoe
   addDistanceToShoe(id: ID!, distance: Float!): Shoe
-  updateShoe(id: ID!, brand: String, model: String, size: Float, distance: Float, ownerId: ID): Shoe
+  updateShoe(id: ID!, brand: String, model: String, size: Float, distance: Float, isDefault: Boolean, ownerId: ID): Shoe
 `;
 
 const resolver = {
   addShoe: async (_, args) => {
-    const { brand, model, size, distance, ownerId } = args;
+    const { brand, model, size, distance, isDefault, ownerId } = args;
     const shoe = new Shoe({
       brand,
       model,
       size,
       distance,
+      isDefault,
       ownerId
     });
     return await shoe.save();
@@ -31,6 +32,7 @@ const resolver = {
       model: args.model,
       size: args.size,
       distance: args.distance,
+      isDefault: args.isDefault,
       ownerId: args.ownerId
     };
     const updates = filterUpdates(inputs);

@@ -8,7 +8,8 @@ const typeDef = `
     password: String!
     fname: String!
     lname: String
-    age: Int
+    birthday: String
+    gender: String
     height: Float
     weight: Float
     measurementSystem: MeasurementSystem!
@@ -16,6 +17,7 @@ const typeDef = `
     currentShoeId: ID
     run(runId: ID!): Run
     runs: [Run]
+    runsByTitle: [Run]
     shoeById(shoeId: ID!): Shoe
     shoes: [Shoe]
   }
