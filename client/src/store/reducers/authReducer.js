@@ -1,6 +1,6 @@
 import { SIGN_IN_SUCCESSFUL, SIGN_IN_ERROR, SIGN_OUT } from './types';
 
-export const authReducer = (state: any, action: any) => {
+export const authReducer = (state, action) => {
   switch (action.type) {
     case SIGN_IN_SUCCESSFUL:
       return {

@@ -12,7 +12,7 @@ const Profile = () => {
     <div className='container'>
       <h1>Profile</h1>
       <Query query={getUserQuery} variables={{ id }}>
-        {({ loading, error, data }: {loading: any, error?: any, data: any}) => {
+        {({ loading, error, data }) => {
           if (error) {
             return <ErrorAlert message={error.message} />
           }

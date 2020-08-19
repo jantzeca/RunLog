@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './styles/errorAlert.scss';
 
-const ErrorAlert = ({ message }: {message: string}) => (
+const ErrorAlert = ({ message }) => (
   <div className='error'>
     <div className='text'>
       <h1>Error:</h1>

@@ -7,12 +7,6 @@ import './styles/navbar.scss';
 const SignedInLinks = () => {
   const { signOut } = useContext(AuthContext);
 
-  const logOut = () => {
-    if (signOut) {
-      signOut();
-    }
-  }
-
   return (
     <ul>
       <li>
@@ -31,7 +25,7 @@ const SignedInLinks = () => {
         </Link>
       </li>
       <li>
-        <Link to='/signin' onClick={logOut} className='link-item'>
+        <Link to='/signin' onClick={signOut} className='link-item'>
           Log Out
         </Link>
       </li>

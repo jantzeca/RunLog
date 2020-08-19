@@ -15,35 +15,36 @@ const AdminDashboard = () => {
     <div className='dashboard'>
       <h1>Admin Dashboard</h1>
       <Query query={getAllUsers}>
-        {({ loading, error, data }: { loading: any; error?: any; data: any;}): any => {
+        {({ loading, error, data }) => {
           if (error) {
-            return <ErrorAlert message={error.message} />;
+            console.error(error);
+            return <ErrorAlert message={error.message} />
           }
           return loading ? (
             <Loading />
           ) : (
             <div className='users-container'>
-              {data.users.map((user: any) => {
+              {data.users.map(user => {
                 return (
                   <div
                     className='user-card'
                     key={user.id}
                     onClick={() => {
-                      const { from }: any = location.state || {
+                      const { from } = location.state || {
                         from: { pathname: `user/profile/${user.id}` }
                       };
                       history.replace(from);
                     }}
                   >
-                    <p>
-                      <span className='user-name'>
-                        {user.fname} {user.lname}
-                      </span>
-                    </p>
-                    <p>
-                      <span className='user-email'>{user.email}</span>
-                    </p>
-                  </div>
+                  <p>
+                    <span className='user-name'>
+                      {user.fname} {user.lname}
+                    </span>
+                  </p>
+                  <p>
+                    <span className='user-email'>{user.email}</span>
+                  </p>
+                </div>
                 );
               })}
             </div>

@@ -1,5 +1,3 @@
-// TODO: make a table with search box filtering instead of list of cards
-// potentially even try pagination?
 .dashboard {
   width: 100%;
   height: calc(100vh - 50px);
@@ -17,7 +15,7 @@
     padding: 10px 30px;
 
     .user-card {
-      &::selection {
+      ::selection {
         color: none;
         background: none;
       }
