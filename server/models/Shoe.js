@@ -18,6 +18,10 @@ const shoeSchema = new Schema(
       type: Number,
       required: true
     },
+    isDefault: {
+      type: Boolean,
+      required: true
+    },
     ownerId: {
       type: String,
       required: true

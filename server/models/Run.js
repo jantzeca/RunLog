@@ -13,10 +13,19 @@ const runSchema = new Schema(
     location: String,
     date: String,
     timeOfDay: String,
+    title: {
+      type: String,
+      required: true
+    },
     comment: String,
     // F.K.'s
     shoeId: String,
     userId: {
+      type: String,
+      required: true
+    },
+    type: String,
+    unit: {
       type: String,
       required: true
     }

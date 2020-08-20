@@ -36,7 +36,9 @@ const context = ({ req }) => {
   try {
     jwt.verify(splitToken, process.env.SECRETKEY);
   } catch (error) {
-    throw new AuthenticationError('Auth Token is invalid, please log in');
+    if (req.body.query.indexOf('addUser') === -1) { // addUser mutation Should not require an existing account
+      throw new AuthenticationError('Auth Token is invalid, please log in');
+    }
   }
 };
 
@@ -51,7 +53,7 @@ server.applyMiddleware({ app });
 app.post('/get-token', async (req, res) => {
   const { email, password } = req.body;
   const user = await User.find({ email });
-  if (user) {
+  if (user && user[0]) {
     const match = password === user[0].password;
     // TODO: Setup a hash for the password
     // const match = await bcrypt.compare(password, user[0].password);
