@@ -1,39 +1,43 @@
 .navbar {
   color: #000;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 49px;
-  border-bottom: 1px #ccc solid;
+  height: 50px;
+  border-bottom: 2px #ccc solid;
   box-sizing: border-box;
+  width: 100%;
 
-  h1 {
-    font-size: 1.75rem;
-    margin: 0 0 0 120px;
-    padding: 5px 0 0 7px;
-    height: 1.75rem;
-  }
-
-  ul {
+  .navbarContents {
+    width: 80%;
+    margin: auto;
     display: flex;
     flex-direction: row;
-    list-style: none;
-    font-size: 0.75rem;
-    padding-top: 5px;
-    margin-bottom: 0;
-    height: 1rem;
-  }
+    justify-content: space-between;
 
-  ul li {
-    margin-right: 20px;
-  }
+    .logoLink {
+      text-decoration: none;
+      color: #000;
+    }
 
-  ul li:last-child {
-    margin-right: 40px;
-  }
-
-  ul li .link-item {
-    text-decoration: none;
-    color: #000;
+    ul {
+      display: flex;
+      flex-direction: row;
+      list-style: none;
+      font-size: 0.75rem;
+      padding-top: 5px;
+      margin-bottom: 0;
+      height: 1rem;
+    }
+  
+    ul li {
+      margin-right: 20px;
+    }
+  
+    ul li:last-child {
+      margin-right: 40px;
+    }
+  
+    ul li .link-item {
+      text-decoration: none;
+      color: #000;
+    }
   }
 }

@@ -6,7 +6,7 @@ import Navbar from './components/Layout/Navbar';
 import AdminDashboard from './components/Admin/AdminDashboard';
 import Profile from './components/Profile/Profile';
 import SignIn from './components/Auth/SignIn';
-// import SignUp from './components/Auth/SignUp';
+import SignUp from './components/Auth/SignUp';
 import Welcome from './components/Auth/Welcome';
 import Dashboard from './components/Dashboard/Dashboard';
 import AuthContextProvider, { AuthContext } from './store/contexts/authContext';
@@ -38,8 +38,7 @@ const App = () => {
               <SignIn />
             </Route>
             <Route path='/signup'>
-              <h1>Pretend SignUp Page</h1>
-              {/* <SignUp /> */}
+              <SignUp />
             </Route>
             <PrivateRoute path="/home">
               <Dashboard />

@@ -23,3 +23,18 @@ export const getUserQuery = gql`
     }
   }
 `;
+
+export const addUser = gql`
+  mutation AddUser(
+    $email: String!
+    $password: String!
+    $isAdmin: Boolean!
+  ) {
+    addUser(email: $email, password: $password, isAdmin: $isAdmin) {
+      id
+      email
+      password
+      isAdmin
+    }
+  }
+`;

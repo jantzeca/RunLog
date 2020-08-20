@@ -2,9 +2,9 @@ const User = require('../../models/User');
 const filterUpdates = require('../utils');
 
 const mutation = `
-  addUser(email: String!, password: String!, fname: String!, lname: String, birthday: String, gender: String, height: Int, weight: Float, measurementSystem: MeasurementSystem!, isAdmin: Boolean!, currentShoeId: ID): User
+  addUser(email: String!, password: String!, fname: String, lname: String, birthday: String, gender: String, height: Int, weight: Float, measurementSystem: MeasurementSystem, isAdmin: Boolean, currentShoeId: ID): User
   deleteUser(id: ID!): User
-  updateUser(id: ID!, email: String, password: String, fname: String, lname: String, birthday: String, gender: String, height: Int, weight: Float, measurementSystem: MeasurementSystem!, isAdmin: Boolean, currentShoeId: ID): User
+  updateUser(id: ID!, email: String, password: String, fname: String, lname: String, birthday: String, gender: String, height: Int, weight: Float, measurementSystem: MeasurementSystem, isAdmin: Boolean, currentShoeId: ID): User
   setNewCurrentShoe(id: ID!, currentShoeId: ID!): User
 `;
 

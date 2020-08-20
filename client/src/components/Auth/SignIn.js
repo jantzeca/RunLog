@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../store/contexts/authContext';
 
-import './styles/signin.scss';
+import './styles/inputForm.scss';
 
 const SignIn = () => {
   let [email, setEmail] = useState('');

@@ -1,0 +1,32 @@
+.logo {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+
+  & h1 {
+    font-size: 1.75rem;
+    padding-top: 5px;
+    margin: 0;
+    height: 1.75rem;
+  }
+
+  .bar {
+    width: 5.5px;
+    height: 20px;
+    border-radius: 9.5px;
+    margin-left: 7px;
+    margin-top: 5px;
+    align-self: flex-start;
+    // transform: rotateX(45deg);
+    transform: matrix(0.74, 0.72, -0.64, 0.73, 0, 0);
+  }
+
+  #blueBar {
+    background: #1985A1;
+  }
+
+  #grayBar {
+    background: #4C5C68;
+    margin-left: 6px;
+  }
+}

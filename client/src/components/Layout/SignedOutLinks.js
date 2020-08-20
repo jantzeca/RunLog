@@ -1,16 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 import './styles/signedOutLinks.scss';
 
 const SignedOutLinks = () => (
-  <ul>
-    <li>
-      <Link to='/signin' className='btn btn-secondary'>
-        Log In
-      </Link>
-    </li>
-  </ul>
-)
+  <ul id="placeHolder"></ul>
+);
 
-export default SignedOutLinks
+export default SignedOutLinks;

@@ -6,19 +6,13 @@ const userSchema = new Schema(
       type: String,
       required: true
     },
-    fname: {
-      type: String,
-      required: true
-    },
+    fname: String,
     lname: String,
     birthday: String,
     gender: String,
     height: Number,
     weight: Number,
-    measurementSystem: {
-      type: String,
-      required: true
-    },
+    measurementSystem: String,
     password: {
       type: String,
       required: true

@@ -6,14 +6,14 @@ const typeDef = `
     id: ID!
     email: String!
     password: String!
-    fname: String!
+    fname: String
     lname: String
     birthday: String
     gender: String
     height: Float
     weight: Float
-    measurementSystem: MeasurementSystem!
-    isAdmin: Boolean
+    measurementSystem: MeasurementSystem
+    isAdmin: Boolean!
     currentShoeId: ID
     run(runId: ID!): Run
     runs: [Run]
