@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-
 import { AuthContext } from '../../store/contexts/authContext';
 
 import './styles/signin.scss';
@@ -52,32 +51,20 @@ const SignIn = () => {
   };
 
   return (
-    <div className='container'>
-      <form onSubmit={handleSubmit}>
-        <h5>Sign In</h5>
-        <div className='input-field'>
-          <label htmlFor='email'>Email</label>
-          <input
-            type='email'
-            name='email'
-            id='email'
-            onChange={handleChange(setEmail)}
-            value={email}
-          />
+    <div className="signInContainer">
+      <form className="loginForm" onSubmit={handleSubmit}>
+        <h1>Log In</h1>
+        <div className="infoInputContainer">
+          <div className="loginInputSection">
+            <p>Email</p>
+            <input onChange={handleChange(setEmail)} type="email" name="email" id="email" placeholder="Email" />
+          </div>
+          <div className="loginInputSection">
+            <p>Password</p>
+            <input onChange={handleChange(setPassword)} type="password" name="password" id="password" placeholder="Password" />
+          </div>
         </div>
-        <div className='input-field'>
-          <label htmlFor='password'>Password</label>
-          <input
-            type='password'
-            name='password'
-            id='password'
-            onChange={handleChange(setPassword)}
-            value={password}
-          />
-        </div>
-        <div className='submit-field'>
-          <input className='btn' type='submit' value='submit' />
-        </div>
+        <input type="submit" value="Log In"/>
       </form>
     </div>
   );

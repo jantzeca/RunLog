@@ -6,8 +6,9 @@ import Navbar from './components/Layout/Navbar';
 import AdminDashboard from './components/Admin/AdminDashboard';
 import Profile from './components/Profile/Profile';
 import SignIn from './components/Auth/SignIn';
-import Welcome from './components/Auth/Welcome';
 // import SignUp from './components/Auth/SignUp';
+import Welcome from './components/Auth/Welcome';
+import Dashboard from './components/Dashboard/Dashboard';
 import AuthContextProvider, { AuthContext } from './store/contexts/authContext';
 
 const App = () => {
@@ -40,6 +41,9 @@ const App = () => {
               <h1>Pretend SignUp Page</h1>
               {/* <SignUp /> */}
             </Route>
+            <PrivateRoute path="/home">
+              <Dashboard />
+            </PrivateRoute>
             <AdminRoute path='/adminDashboard'>
               <AdminDashboard />
             </AdminRoute>
@@ -60,7 +64,7 @@ const PublicRoute = ({ ...attrs }) => {
       {...attrs}
       render={() =>
         auth.authenticated ? (
-          <h1>Temp Dashboard Replacement</h1>
+          <Dashboard />
         ) : (
           <Welcome />
         )
