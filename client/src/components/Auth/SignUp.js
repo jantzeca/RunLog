@@ -38,7 +38,7 @@ const SignUp = () => {
       });
       const body = await res.json();
       // On Sign Up, take to profile to update information.
-      // Maybe oven a specific page just for this case with open inputs
+      // Maybe even a specific page just for this case with open inputs
       // instead of the on hover edit buttons.
       if (body.success) {
         setToken(body.token);
