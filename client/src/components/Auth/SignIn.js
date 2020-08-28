@@ -5,7 +5,7 @@ import { AuthContext } from '../../store/contexts/authContext';
 import './styles/inputForm.scss';
 
 const SignIn = () => {
-  let [email, setEmail] = useState('cjantzen@gmail.com');
+  let [email, setEmail] = useState('cjantzen@gmail.com'); // TODO: Remove this temporary ease of access account.
   let [password, setPassword] = useState('myPassword');
   let { authStatus, setToken } = useContext(AuthContext);
 

@@ -13,7 +13,7 @@ const SignUp = () => {
 
   let history = useHistory();
 
-  const [createUser, { data }] = useMutation(addUser);
+  const [createUser] = useMutation(addUser);
 
   const handleSubmit = async e => {
     e.preventDefault();
