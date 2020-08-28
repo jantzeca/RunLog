@@ -43,7 +43,7 @@ const App = () => {
             <PrivateRoute path="/home">
               <Dashboard />
             </PrivateRoute>
-            <AdminRoute path='/adminDashboard'>
+            <AdminRoute path='/adminhome'>
               <AdminDashboard />
             </AdminRoute>
             <PrivateRoute path='/user/profile/:id'>
@@ -114,6 +114,7 @@ const AdminRoute = ({ children, ...rest }) => {
               state: { from: location }
             }}
           />
+          // TODO: Also make sure there's no token in the local storage???
         )
       }
     />

@@ -1,30 +1,38 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../store/contexts/authContext';
+import { SearchIcon } from './searchIcon';
 
 import './styles/navbar.scss';
 
 const SignedInLinks = () => {
-  const { signOut } = useContext(AuthContext);
+  const { signOut, auth } = useContext(AuthContext);
+
+  const openSearch = (e) => {
+    // e.target.classList.add('hidden');
+    // remove hidden from the search box?
+  };
 
   return (
     <ul>
       <li>
-        <Link to='/adminDashboard' className='link-item'>
+        <SearchIcon onClick={openSearch}/>
+      </li>
+      <li>
+        <Link to={`${auth.isAdmin ? '/adminhome' : '/home'}`} className='link-item'>
           Dashboard
         </Link>
       </li>
       <li>
-        <Link to='/training' className='link-item'>
-          Training
+        <Link to='/newrun' className='link-item'>
+          New Run
         </Link>
       </li>
+      {/* <li>
+        <NavDropDown />
+      </li> */}
       <li>
-        <Link to='/challenges' className='link-item'>
-          Challenges
-        </Link>
-      </li>
-      <li>
+        {/* ^ Replace logout with downward carrot and profile pic. Make profile pic component that takes a size parameter */}
         <Link to='/signin' onClick={signOut} className='link-item'>
           Log Out
         </Link>

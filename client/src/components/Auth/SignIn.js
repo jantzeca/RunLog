@@ -5,8 +5,8 @@ import { AuthContext } from '../../store/contexts/authContext';
 import './styles/inputForm.scss';
 
 const SignIn = () => {
-  let [email, setEmail] = useState('');
-  let [password, setPassword] = useState('');
+  let [email, setEmail] = useState('cjantzen@gmail.com');
+  let [password, setPassword] = useState('myPassword');
   let { authStatus, setToken } = useContext(AuthContext);
 
   let history = useHistory();
@@ -36,7 +36,7 @@ const SignIn = () => {
         setEmail('');
         setPassword('');
         const { from } = location.state || {
-          from: { pathname: '/adminDashboard' }
+          from: { pathname: `${body.isAdmin ? '/adminhome' : '/home'}` }
         };
         history.replace(from);
       } else {
